@@ -1,6 +1,8 @@
 Getting started
 ===============
 
+You can download the **3D-PDR** code from this `GitHub link <https://github.com/itamos-ism/3D-PDR>`_.
+
 To install **3D-PDR**, you must first install **SUNDIALS**.  
 You will need the **gfortran** and **gcc** compilers, as well as **CMake**.
 

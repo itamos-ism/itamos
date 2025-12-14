@@ -50,7 +50,9 @@ The paramsRTsynth.dat File
 * **Entries 1-7**: General parameters (directory, output directory, prefix, velocity file, turbulent velocity, dust-to-gas ratio, redshift)
 
 .. note::
-   Make sure that the output directory ``simsRTsynth/`` (or your another name specified by the user) exists before running a model
+   ::
+      * The ``gasvelocity`` file should be inside the ``sims/`` directory
+      * Make sure that the output directory ``simsRTsynth/`` (or your another name specified by the user) exists before running a model
 
 ::
 

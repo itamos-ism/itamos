@@ -61,6 +61,15 @@ The paramsRTsynth.dat File
 
 * **Entries 7-14**: Observation-specific parameters (direction, resolution, coolant, line, edge cells, velocity range)
 
+Custom parameter files (e.g., ``paramsUser.dat``) can be specified using the command-line options ``-p=`` or ``--params``:
+
+.. code-block:: bash
+
+    ./RTsynth -p=paramsUser.dat
+
+.. note::
+   Parameter filenames must not exceed 50 characters.
+
 Running RT-synth
 ~~~~~~~~~~~~~~~~
 

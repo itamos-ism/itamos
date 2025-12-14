@@ -51,7 +51,7 @@ The paramsRTsynth.dat File
 
 .. note::
       * The ``gasvelocity`` file should be inside the ``sims/`` directory
-      * Make sure that the output directory ``simsRTsynth/`` (or your another name specified by the user) exists before running a model
+      * Make sure that the output directory ``simsRTsynth/`` (or another name specified by the user) exists before running a model
 
 ::
 

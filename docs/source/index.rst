@@ -31,6 +31,7 @@ Welcome to the documentation of the ITAMOS project!
    3d-pdr/species
    3d-pdr/ics
    3d-pdr/outputs
+   3d-pdr/convert
    3d-pdr/examples
 
 .. toctree::

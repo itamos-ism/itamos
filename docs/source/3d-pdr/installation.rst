@@ -11,8 +11,8 @@ Before proceeding, create a home directory where the code will be installed, for
 .. code-block:: console
 
     $ cd
-    $ mkdir PDRmodels
-    $ cd PDRmodels
+    $ mkdir 3D-PDR
+    $ cd 3D-PDR
 
 
 Installing CMake
@@ -21,7 +21,7 @@ Installing CMake
 First, check whether ``cmake`` is already installed on your system.  
 If it is, you may skip this section.
 
-To install ``cmake``, download it within your ``~/PDRmodels/`` directory:
+To install ``cmake``, download it within your ``~/3D-PDR/`` directory:
 
 .. code-block:: console
 
@@ -74,7 +74,7 @@ Configure SUNDIALS using ``cmake``:
 
 .. code-block:: console
 
-    $ cmake -DCMAKE_INSTALL_PREFIX=/YOUR-HOMEPATH/PDRmodels/sundials ../
+    $ cmake -DCMAKE_INSTALL_PREFIX=/YOUR-HOMEPATH/3D-PDR/sundials ../
 
 Build and install:
 
@@ -87,8 +87,8 @@ Next, edit your shell configuration file (e.g. ``~/.bashrc``) and add the follow
 
 .. code-block:: console
 
-    export LD_LIBRARY_PATH=/home/USERNAME/PDRmodels/sundials/lib
-    export SUNDIALS_DIR=/home/USERNAME/PDRmodels/sundials
+    export LD_LIBRARY_PATH=/home/USERNAME/3D-PDR/sundials/lib
+    export SUNDIALS_DIR=/home/USERNAME/3D-PDR/sundials
 
 Then, reload your shell configuration:
 
@@ -106,11 +106,11 @@ For further details on SUNDIALS, see the `SUNDIALS GitHub repository <https://gi
 Installing 3D-PDR
 -----------------
 
-Within the directory ``~/PDRmodels/``, extract the 3D-PDR package:
+Within the directory ``~/3D-PDR/``, extract the 3D-PDR package:
 
 .. code-block:: console
 
-    $ cd ~/PDRmodels/
+    $ cd ~/3D-PDR/
     $ tar xvzf 3DPDR.tgz
 
 Navigate to the source directory:
@@ -140,7 +140,7 @@ To compile **3D-PDR**:
 
     $ make
 
-If compilation completes successfully, an executable named ``3DPDR`` will appear in your ``~/PDRmodels/`` directory.
+If compilation completes successfully, an executable named ``3DPDR`` will appear in your ``~/3D-PDR/`` directory.
 
 You can now run a test model to verify that the installation is successful:
 

@@ -65,7 +65,7 @@ While in the ``3D-PDR/`` home directory execute the following commands:
 Visualization
 ~~~~~~~~~~~~~
 
-Convert the outputs to h5 using the convert script.
+Convert the outputs to h5 using the ``convert`` script (see documentation :doc:`here <sec-convert>`).
 
 
 Column Density Maps

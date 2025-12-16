@@ -1,6 +1,13 @@
 The makefile
 ============
 
+.. note::
+
+   The required ``config.mk``, ``makefile``, and ``params.dat`` files are provided as templates. To set up your simulation:
+
+        1. Copy ``config.mk`` and ``makefile`` from ``src/templates/1D/`` or ``src/templates/3D/`` into your ``src/`` directory, based on your simulation type (1D or 3D).
+        2. Copy the ``params.dat`` file from the same template directory in the **3D-PDR** home directory
+
 The main flags of the code are specified in the ``config.mk`` file.  
 This file is then called within the ``makefile``.  
 

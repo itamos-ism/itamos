@@ -3,7 +3,7 @@ The 3D-PDR code
 
 3D-PDR (`Bisbas et al. 2012 <https://ui.adsabs.harvard.edu/abs/2012MNRAS.427.2100B/abstract>`_) is a state-of-the-art numerical code designed to model photodissociation regions (PDRs) in arbitrary three-dimensional geometries. It self-consistently solves the chemistry, thermal balance, and radiative transfer within the interstellar medium, accounting for the interaction between far-ultraviolet (FUV) radiation and gas and dust. The code employs a ray-tracing scheme based on the HEALPix algorithm to evaluate the attenuation of the radiation field in all directions from each grid cell, allowing realistic treatment of complex density structures. It includes a comprehensive chemical network, heating and cooling processes, and line radiative transfer for key atomic and molecular species. 
 
-The upgraded 3D-PDR uses the ray-tracing scheme RAYTHEIA (Zhu et al., *in prep*), a highly parallelized algorithm that achieves significant speed-up allowing to model high-resolution PDRs in full three-dimensions. In particular, the MPI-parallelized version enables large-scale simulations on distributed-memory systems, making 3D-PDR a powerful tool for investigating PDRs in both Galactic and extragalactic environments.
+The upgraded 3D-PDR uses the ray-tracing scheme RAYTHEIA (Zhu et al., *submitted*), a highly parallelized algorithm that achieves significant speed-up allowing to model high-resolution PDRs in full three-dimensions. In particular, the MPI-parallelized version enables large-scale simulations on distributed-memory systems, making 3D-PDR a powerful tool for investigating PDRs in both Galactic and extragalactic environments.
 
 Papers using 3D-PDR
 -------------------

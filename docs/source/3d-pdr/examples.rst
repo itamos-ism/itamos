@@ -4,15 +4,13 @@ Examples
 One-dimensional Example Run
 ---------------------------
 
-To run the benchmark test, execute the following sequence from your ``3D-PDR/`` home directory:
+To run the benchmark test, use the ``params.dat`` file found in ``templates/1D`` within the ``3D-PDR/`` home directory. While in ``3D-PDR/`` execute the following commands:
 
 .. code-block:: bash
 
-    cd templates
-    cp config.mk makefile ../src
-    cp params.dat ../
-    cd ..
-    cd src
+    cp templates/1D/config.mk templates/1D/makefile src/
+    cp templates/1D/params.dat .
+    cd src/
     make clean; make
     cd ..
     ./3DPDR
@@ -45,13 +43,14 @@ Three-dimensional Example (32³ cells)
 -------------------------------------
 
 **Setup and Execution:**
+While in the ``3D-PDR/`` home directory execute the following commands:
 
 .. code-block:: bash
 
     cp templates/3D/config.mk templates/3D/makefile src/
-    cp templates/3D/params.dat ./
+    cp templates/3D/params.dat .
     cd src/
-    make
+    make clean; make
 
 **Configure OpenMP threads (optional):**
 
@@ -68,10 +67,15 @@ Visualization
 
 Convert ``.fin`` files to HDF5 format using the converter in ``sims/convert_fin2h5``.
 
-**Required parameters in ``m_parameters.F90``:**
+**Required flags in ``makefile``:**
+Edit the makefile and insert the following information:
 
 - ``F90``: Fortran compiler (e.g., ``gfortran`` or ``h5fc``)
 - ``HDF_DIR``: Path to HDF5 directory
+
+**Required parameters in ``m_parameters.F90``:**
+Edit this file and insert the following information:
+
 - ``coo``: Number of coolants (from ``params.dat``)
 - ``nspec``: Number of species (lines in ``chemfiles/species_reduced.d``)
 - ``nrays``: Number of HEALPix rays (default: 12)

@@ -1,3 +1,5 @@
+.. _sec-convert:
+
 Convert to hdf5
 ===============
 

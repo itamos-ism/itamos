@@ -26,3 +26,4 @@ All outputs are written in the ``simsRTsynth`` directory specified in the RT-syn
 * ``RT_[prefix]_[los_direction]_cds.dat``: Column densities (H₂, HI, C⁺, C, CO, HCO⁺, total)
 * ``RT_[prefix]_[los_direction]_[line].dat``: Velocity-integrated maps
 * ``RT_vel_[prefix]_[los_direction]_[line].dat``: Radiation temperature per velocity channel
+* ``RT_tau_[prefix]_[los_direction]_[line].dat``: Optical depth per velocity channel

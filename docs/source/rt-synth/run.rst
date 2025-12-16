@@ -15,7 +15,7 @@ or specify a particular parameters file as:
 
 .. code-block:: bash
 
-   ./RTsynth -p=paramUser.dat
+   ./RTsynth -p=paramsUser.dat
 
 
 Outputs

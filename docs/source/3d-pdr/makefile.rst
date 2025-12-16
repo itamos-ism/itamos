@@ -1,7 +1,7 @@
 The makefile
 ============
 
-.. note::
+.. important::
    The required ``config.mk``, ``makefile``, and ``params.dat`` files are provided as templates. To set up your simulation:
  
    1. Copy ``config.mk`` and ``makefile`` from ``src/templates/1D/`` or ``src/templates/3D/`` into your ``src/`` directory, based on your simulation type (1D or 3D).

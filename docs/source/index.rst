@@ -46,6 +46,10 @@ Welcome to the documentation of the ITAMOS project!
    :caption: RT-synth:
 
    rt-synth/RT-synth
+   rt-synth/makefile
+   rt-synth/params
+   rt-synth/run
+   rt-synth/vel2fits
    rt-synth/gallery
 
 

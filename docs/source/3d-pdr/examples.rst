@@ -4,7 +4,7 @@ Examples
 One-dimensional Example Run
 ---------------------------
 
-To run the benchmark test, execute the following sequence from your ``3D-PDR`` directory:
+To run the benchmark test, execute the following sequence from your ``3D-PDR/`` home directory:
 
 .. code-block:: bash
 

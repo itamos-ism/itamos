@@ -1,6 +1,6 @@
-=========================
-Heating Processes in 3D-PDR
-=========================
+=================
+Heating Processes
+=================
 
 This file documents the heating terms implemented in the
 ``CALC_HEATING`` subroutine of the 3D-PDR code. Each heating mechanism

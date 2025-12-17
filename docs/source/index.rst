@@ -25,7 +25,6 @@ Welcome to the documentation of the ITAMOS project!
 
    3d-pdr/3dpdr
    3d-pdr/gallery
-   3d-pdr/heating
    3d-pdr/installation
    3d-pdr/makefile
    3d-pdr/params
@@ -34,6 +33,7 @@ Welcome to the documentation of the ITAMOS project!
    3d-pdr/outputs
    3d-pdr/convert
    3d-pdr/examples
+   3d-pdr/heating
 
 .. toctree::
    :maxdepth: 3

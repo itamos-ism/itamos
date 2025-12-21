@@ -362,9 +362,7 @@ Exothermic Reaction Heating
 This routine computes the heating from exothermic chemical reactions. When chemical bonds form or rearrange, the released energy (reaction enthalpy) can be deposited as thermal energy into the gas.
 
 For each exothermic reaction:
-\[
-\Gamma_{\mathrm{chem}} = n_1 n_2 \times k \times E
-\]
+:math: `\Gamma_{\mathrm{chem}} = n_1 n_2 \times k \times E`
 where:
 - :math:`n_1, n_2` = Number densities of reactants (cm⁻³)
 - :math:`k` = Reaction rate coefficient (cm³ s⁻¹)

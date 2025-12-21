@@ -389,44 +389,24 @@ Mathematical Expressions
 
 where:
 
-1. **H₂⁺ + e⁻ recombination**:
-   \[
-   \Gamma_1 = f_{\mathrm{H}_2^+} n_{\mathrm{H}} \times f_e n_{\mathrm{H}} \times k_1 \times (10.9\ \mathrm{eV})
-   \]
+1. **H₂⁺ + e⁻ recombination**: :math:`\Gamma_1 = f_{\mathrm{H}_2^+} n_{\mathrm{H}} \times f_e n_{\mathrm{H}} \times k_1 \times (10.9\ \mathrm{eV})`
 
-2. **H₂⁺ + H charge transfer**:
-   \[
-   \Gamma_2 = f_{\mathrm{H}_2^+} n_{\mathrm{H}} \times f_{\mathrm{H}} n_{\mathrm{H}} \times k_2 \times (0.94\ \mathrm{eV})
-   \]
+2. **H₂⁺ + H charge transfer**: :math:`\Gamma_2 = f_{\mathrm{H}_2^+} n_{\mathrm{H}} \times f_{\mathrm{H}} n_{\mathrm{H}} \times k_2 \times (0.94\ \mathrm{eV})`
 
-3. **HCO⁺ + e⁻ recombination**:
-   \[
-   \Gamma_3 = f_{\mathrm{HCO}^+} n_{\mathrm{H}} \times f_e n_{\mathrm{H}} \times k_3 \times (7.51\ \mathrm{eV})
-   \]
+3. **HCO⁺ + e⁻ recombination**: :math:`\Gamma_3 = f_{\mathrm{HCO}^+} n_{\mathrm{H}} \times f_e n_{\mathrm{H}} \times k_3 \times (7.51\ \mathrm{eV})`
 
-4. **H₃⁺ + e⁻ recombination** (two channels):
-   \[
-   \Gamma_4 = f_{\mathrm{H}_3^+} n_{\mathrm{H}} \times f_e n_{\mathrm{H}} \times (k_{4a} \times 4.76\ \mathrm{eV} + k_{4b} \times 9.23\ \mathrm{eV})
-   \]
+4. **H₃⁺ + e⁻ recombination** (two channels): :math:`\Gamma_4 = f_{\mathrm{H}_3^+} n_{\mathrm{H}} \times f_e n_{\mathrm{H}} \times (k_{4a} \times 4.76\ \mathrm{eV} + k_{4b} \times 9.23\ \mathrm{eV})`
 
-5. **H₃O⁺ + e⁻ recombination** (three channels):
-   \[
-   \Gamma_5 = f_{\mathrm{H}_3\mathrm{O}^+} n_{\mathrm{H}} \times f_e n_{\mathrm{H}} \times (k_{5a} \times 1.16\ \mathrm{eV} + k_{5b} \times 5.63\ \mathrm{eV} + k_{5c} \times 6.27\ \mathrm{eV})
-   \]
+5. **H₃O⁺ + e⁻ recombination** (three channels): :math:`\Gamma_5 = f_{\mathrm{H}_3\mathrm{O}^+} n_{\mathrm{H}} \times f_e n_{\mathrm{H}} \times (k_{5a} \times 1.16\ \mathrm{eV} + k_{5b} \times 5.63\ \mathrm{eV} + k_{5c} \times 6.27\ \mathrm{eV})`
 
-6. **He⁺ + H₂ reactions** (two channels):
-   \[
-   \Gamma_6 = f_{\mathrm{He}^+} n_{\mathrm{H}} \times f_{\mathrm{H}_2} n_{\mathrm{H}} \times (k_{6a} + k_{6b}) \times (6.51\ \mathrm{eV})
-   \]
+6. **He⁺ + H₂ reactions** (two channels): :math:`\Gamma_6 = f_{\mathrm{He}^+} n_{\mathrm{H}} \times f_{\mathrm{H}_2} n_{\mathrm{H}} \times (k_{6a} + k_{6b}) \times (6.51\ \mathrm{eV})`
 
-7. **He⁺ + CO reactions** (one to three channels depending on network):
-   \[
-   \Gamma_7 = f_{\mathrm{He}^+} n_{\mathrm{H}} \times f_{\mathrm{CO}} n_{\mathrm{H}} \times (\sum k_{7,i}) \times (2.22\ \mathrm{eV})
-   \]
+7. **He⁺ + CO reactions** (one to three channels depending on network): :math:`\Gamma_7 = f_{\mathrm{He}^+} n_{\mathrm{H}} \times f_{\mathrm{CO}} n_{\mathrm{H}} \times (\sum k_{7,i}) \times (2.22\ \mathrm{eV})`
 
 Network-Specific Rate Indices
------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The reaction rate indices vary significantly between networks:
+
 
 +-----------------+----------------+----------------+----------------+-------------------+
 | **Reaction**    | **REDUCED**    | **MEDIUM**     | **FULL**       | **MYNETWORK**     |

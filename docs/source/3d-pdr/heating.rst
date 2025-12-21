@@ -306,21 +306,61 @@ Stored as:
 Cosmic-Ray Heating
 ----------------------------
 
-Cosmic-ray ionization of molecular hydrogen heats the gas.
-An effective energy deposition of 9.4 eV per primary ionization is used.
+This routine computes the heating due to cosmic-ray ionization. When cosmic rays ionize atoms and molecules, the kinetic energy of the ejected electrons and subsequent thermalization of the ionization cascade deposits heat into the gas.
 
-The heating rate is
+Key References
+~~~~~~~~~~~~~~
+- `Tielens & Hollenbach (1985, ApJ, 291, 772) <https://ui.adsabs.harvard.edu/abs/1985ApJ...291..722T/abstract>`_; Primary formulation
+- `Shull & Van Steenberg (1985, ApJ, 298, 268) <https://ui.adsabs.harvard.edu/abs/1985ApJ...298..268S/abstract>`_
+- `Clavel et al. (1978, A&A, 65, 435) <https://ui.adsabs.harvard.edu/abs/1978A%26A....65..435C/abstract>`_
+- `Kamp & van Zadelhoff (2001, A&A, 373, 641) <https://ui.adsabs.harvard.edu/abs/2001A%26A...373..641K/abstract>`_
+
+The cosmic-ray heating rate is given by:
 
 .. math::
+   \Gamma_{\mathrm{CR}} = E_{\mathrm{dep}} \times (\zeta_{\mathrm{H}_2} \times n_{\mathrm{H}_2})
 
-   \Gamma_{\rm CR} =
-   (9.4~{\rm eV}) \,
-   (1.3 \times 10^{-17}) \,
-   \zeta \,
-   n({\rm H_2}) \,
-   n_{\rm H}
+where:
 
-where :math:`\zeta` is the local cosmic-ray ionization scaling factor.
+1. **Energy deposited per ionization** (:math:`E_{\mathrm{dep}}`):
+   - : 9.4 eV
+   
+2. **H₂ ionization rate** (:math:`\zeta_{\mathrm{H}_2}`): :math:`\zeta_{\mathrm{H}_2} = 1.3 \times 10^{-17} \times \zeta_{\mathrm{local}}\ \mathrm{s}^{-1}`, where :math:`\zeta_{\mathrm{local}}` is the local cosmic-ray ionization rate scaling factor.
+
+Complete Expression
+~~~~~~~~~~~~~~~~~~~
+
+.. math::
+   
+   \boxed{\Gamma_{\mathrm{CR}} = (9.4\ \mathrm{eV}) \times (1.3 \times 10^{-17} \times \zeta_{\mathrm{local}}) \times n_{\mathrm{H}} \times f_{\mathrm{H}_2}}
+
+Expressed in terms of physical quantities:
+
+.. math::
+   \Gamma_{\mathrm{CR}} = 9.4 \times 1.602 \times 10^{-12} \times 1.3 \times 10^{-17} \times \zeta_{\mathrm{local}} \times n_{\mathrm{H}} \times f_{\mathrm{H}_2}\ \mathrm{erg\ cm}^{-3}\ \mathrm{s}^{-1}
+
+Numerical Constant
+~~~~~~~~~~~~~~~~~~
+The product of constants gives:
+
+.. math::
+   9.4 \times 1.602 \times 10^{-12} \times 1.3 \times 10^{-17} = 1.958 \times 10^{-28}
+
+Thus: :math:`\Gamma_{\mathrm{CR}} = 1.958 \times 10^{-28} \times \zeta_{\mathrm{local}} \times n_{\mathrm{H}} \times f_{\mathrm{H}_2}`
+
+Energy Deposition Details
+~~~~~~~~~~~~~~~~~~~~~~~~~
+- Primary ionization by cosmic rays produces fast electrons (~30 eV)
+- These electrons cause secondary ionizations and excitations
+- Ultimately, ~9.4 eV per primary ionization ends up as thermal energy
+- The remaining energy goes into ionization, excitation, and dissociation
+
+Notes
+~~~~~
+1. The factor 1.3 × 10⁻¹⁷ s⁻¹ is the standard Galactic H₂ cosmic-ray ionization rate.
+2. The heating depends linearly on H₂ abundance, as H₂ is the primary target for cosmic rays in molecular gas.
+3. In predominantly atomic gas, the heating would need to be adjusted (though the current implementation assumes H₂-dominated regions).
+4. Cosmic-ray heating is particularly important in dense, shielded regions where UV heating is negligible.
 
 Stored as:
 
@@ -330,17 +370,78 @@ Stored as:
 Turbulent Dissipation Heating
 -----------------------------
 
-Dissipation of supersonic turbulence provides an additional heating
-source, particularly relevant in dense and dynamically active regions.
+This routine computes the heating from dissipation of supersonic turbulence. Turbulent kinetic energy cascades to smaller scales and is ultimately converted to thermal energy through viscous dissipation.
 
-The heating rate follows Black (1987):
+Key References
+~~~~~~~~~~~~~~~
+- Black (1987, in `"Interstellar Processes", p. 731 <https://ui.adsabs.harvard.edu/abs/1987ASSL..134.....H/abstract>`_); Primary formulation
+- `Rodríguez-Fernández et al. (2001, A&A, 365, 174) <https://ui.adsabs.harvard.edu/abs/2001A%26A...365..174R/abstract>`_
+
+Physical Process
+~~~~~~~~~~~~~~~~
+Supersonic turbulence in molecular clouds decays on approximately a crossing time scale. The dissipated energy heats the gas. This mechanism is most relevant in regions with strong turbulent motions, such as galactic centers.
+
+The turbulent heating rate follows:
 
 .. math::
+   \Gamma_{\mathrm{turb}} = \rho \times \frac{v_{\mathrm{turb}}^3}{L_{\mathrm{turb}}}
 
-   \Gamma_{\rm turb} \propto
-   \rho \, \frac{v_{\rm turb}^3}{L_{\rm turb}}
+where:
+- :math:`\rho` = Gas mass density (g cm⁻³)
+- :math:`v_{\mathrm{turb}}` = Turbulent velocity (cm s⁻¹)
+- :math:`L_{\mathrm{turb}}` = Turbulent driving scale (cm)
 
-with a default turbulent length scale of 5 pc.
+
+Complete Expression
+~~~~~~~~~~~~~~~~~~~
+
+.. math::
+   
+   \boxed{\Gamma_{\mathrm{turb}} = 3.5 \times 10^{-28} \times \left(\frac{v_{\mathrm{turb}}}{10^5\ \mathrm{cm\ s}^{-1}}\right)^3 \times \left(\frac{1}{L_{\mathrm{turb}}}\right) \times n_{\mathrm{H}}}
+   
+with :math:`L_{\mathrm{turb}}` in parsecs (pc).
+
+In terms of physical quantities:
+
+.. math::
+   \Gamma_{\mathrm{turb}} = 3.5 \times 10^{-28} \times \left(\frac{v_{\mathrm{turb}}}{1\ \mathrm{km\ s}^{-1}}\right)^3 \times \left(\frac{1\ \mathrm{pc}}{L_{\mathrm{turb}}}\right) \times n_{\mathrm{H}}\ \mathrm{erg\ cm}^{-3}\ \mathrm{s}^{-1}
+
+The factor 3.5 × 10⁻²⁸ comes from:
+- Mass density: :math:`\rho = n_{\mathrm{H}} m_{\mathrm{H}}` (with :math:`m_{\mathrm{H}} = 1.67 \times 10^{-24}` g)
+- Velocity conversion: 1 km s⁻¹ = 10⁵ cm s⁻¹
+- Length conversion: 1 pc = 3.086 × 10¹⁸ cm
+
+Thus: :math:`3.5 \times 10^{-28} \approx \frac{m_{\mathrm{H}}}{(10^5)^3 \times (3.086 \times 10^{18})} \times \text{(dimensionless efficiency factor)}`
+
+Turbulent Parameters
+~~~~~~~~~~~~~~~~~~~~
+
+1. **Turbulent Velocity** (:math:`v_{\mathrm{turb}}`):
+   - Galactic center: ~15 km s⁻¹
+   - Typical molecular clouds: 1-5 km s⁻¹
+   - Input units: km s⁻¹ (converted to cm s⁻¹ in formula)
+
+2. **Turbulent Scale Length** (:math:`L_{\mathrm{turb}}`):
+   - Default: 5.0 pc (as set in code)
+   - Typical range: 0.1-100 pc depending on environment
+
+3. **Density**: turbulence heats all gas
+
+Dissipation Timescale
+~~~~~~~~~~~~~~~~~~~~~
+The turbulent dissipation timescale is:
+
+.. math::
+   t_{\mathrm{diss}} \approx \frac{L_{\mathrm{turb}}}{v_{\mathrm{turb}}} \approx 10^6\ \mathrm{yr} \times \left(\frac{L_{\mathrm{turb}}}{5\ \mathrm{pc}}\right) \left(\frac{v_{\mathrm{turb}}}{5\ \mathrm{km\ s}^{-1}}\right)^{-1}
+
+Notes
+~~~~~
+1. This heating mechanism is most significant in regions with strong turbulence (e.g., galactic centers, starburst regions).
+2. The simple :math:`v^3/L` scaling assumes Kolmogorov turbulence and isotropic dissipation.
+3. The default scale length of 5 pc is appropriate for Galactic molecular clouds but may need adjustment for other environments.
+4. Turbulent heating can be comparable to or exceed other heating mechanisms in strongly turbulent regions.
+5. The heating rate scales linearly with density but cubically with velocity, making it very sensitive to the turbulent Mach number.
+
 
 Stored as:
 

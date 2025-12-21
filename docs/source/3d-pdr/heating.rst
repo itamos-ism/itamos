@@ -35,26 +35,142 @@ Units and Conventions
 PAH Photoelectric Heating
 -------------------------------
 
-Photoelectric heating from polycyclic aromatic hydrocarbons (PAHs) and
-very small grains is included using the formulation of
-`Bakes & Tielens (1994) <https://ui.adsabs.harvard.edu/abs/1994ApJ...427..822B/abstract>`_, with updates from 
-`Wolfire et al. (2003) <https://ui.adsabs.harvard.edu/abs/2003ApJ...587..278W/abstract>`_.
+This routine computes the photoelectric heating rate from dust grains and Polycyclic Aromatic Hydrocarbons (PAHs) using the formalism of Bakes & Tielens (1994) with modifications from Wolfire et al. (2003, 2008). The calculation assumes an MRN grain-size distribution with radii ranging from 3 to 100 Å.
 
-This mechanism accounts for both heating and cooling due to PAH charge
-exchange with the gas.
+Key references
+~~~~~~~~~~~~~~
 
-The net PAH photoelectric heating rate is
+- `Bakes & Tielens (1994, ApJ, 427, 822) <https://ui.adsabs.harvard.edu/abs/1994ApJ...427..822B/abstract>`_
+- `Wolfire et al. (2003, ApJ, 587, 278) <https://ui.adsabs.harvard.edu/abs/2003ApJ...587..278W/abstract>`_; PAH abundance revision from Spitzer data
+- `Wolfire et al. (2008, ApJ, 680, 384) <https://ui.adsabs.harvard.edu/abs/2008ApJ...680..384W/abstract>`_; PAH scaling factor
+- `Wolfire et al. (1995, ApJ, 443, 152) <https://ui.adsabs.harvard.edu/abs/1995ApJ...443..152W/abstract>`_
+- `Le Page, Snow & Bierbaum (2001, ApJS, 132, 233) <https://ui.adsabs.harvard.edu/abs/2001ApJS..132..233L/abstract>`_
+
+
+1. **PAH Scaling Factor** (Wolfire et al. 2008)
+
+   .. math::
+      \phi_{\mathrm{PAH}} = 0.4
+
+   *Note*: Setting :math:`\phi_{\mathrm{PAH}} = 1.0` recovers the original Bakes & Tielens (1994) formulation.
+
+2. **Temperature-dependent Exponents**
+
+   .. math::
+      \alpha &= 0.944
+   
+   .. math::
+      \beta(T) = \frac{0.735}{T^{0.068}}
+   
+   where :math:`T` is the gas temperature in Kelvin.
+
+3. **Dimensionless Ionization Parameter** (:math:`\delta`)
+
+   .. math::
+      \delta = \frac{G_0 \sqrt{T}}{n_e n_{\mathrm{H}} \phi_{\mathrm{PAH}}}
+
+   where:
+   
+   - :math:`G_0` = Habing radiation field strength (1 Habing unit = :math:`1.6 \times 10^{-3}` erg cm⁻² s⁻¹)
+   - :math:`T` = Gas temperature (K)
+   - :math:`n_e` = Electron number density (cm⁻³)
+   - :math:`n_{\mathrm{H}}` = Total hydrogen number density (cm⁻³)
+
+4. **Photoelectric Heating Efficiency** (:math:`\epsilon`)
+
+   .. math::
+      \epsilon(T, \delta) = \frac{4.87 \times 10^{-2}}{1 + 4.0 \times 10^{-3} \delta^{0.73}} 
+                          + \frac{3.65 \times 10^{-2} \left(\dfrac{T}{10^4}\right)^{0.7}}{1 + 2.0 \times 10^{-4} \delta}
+
+5. **Heating and Cooling Rates**
+
+   **PAH Heating Rate** (erg cm⁻³ s⁻¹):
+   
+   .. math::
+      \Gamma_{\mathrm{heat}} = 1.30 \times 10^{-24} \epsilon G_0 n_{\mathrm{H}}
+
+   **PAH Cooling Rate** (erg cm⁻³ s⁻¹):
+   
+   .. math::
+      \Lambda_{\mathrm{cool}} = 4.65 \times 10^{-30} T^{\alpha} \delta^{\beta} n_e n_{\mathrm{H}} \phi_{\mathrm{PAH}}
+
+6. **Net Photoelectric Heating Rate**
+
+   .. math::
+      \Gamma_{\mathrm{PE}} = \left(\Gamma_{\mathrm{heat}} - \Lambda_{\mathrm{cool}}\right) \times Z
+
+   where :math:`Z` is the metallicity relative to solar (linear scaling factor).
+
+Combined Formula
+~~~~~~~~~~~~~~~~
+
+Substituting all components:
 
 .. math::
+   :label: pah_master_eq
+   
+   \boxed{\Gamma_{\mathrm{PE}} = Z \left[ 1.30 \times 10^{-24} \epsilon G_0 n_{\mathrm{H}} 
+          - 4.65 \times 10^{-30} T^{\alpha} \delta^{\beta} n_e n_{\mathrm{H}} \phi_{\mathrm{PAH}} \right]}
 
-   \Gamma_{\rm PAH} =
-   \left( \Gamma_{\rm heat} - \Lambda_{\rm cool} \right) Z
+with the auxiliary definitions:
 
-where :math:`Z` is the metallicity scaling factor.
+.. math::
+   \delta &= \frac{G_0 \sqrt{T}}{n_e n_{\mathrm{H}} \phi_{\mathrm{PAH}}} \\
+   \epsilon &= \frac{4.87 \times 10^{-2}}{1 + 4.0 \times 10^{-3} \delta^{0.73}} 
+              + \frac{3.65 \times 10^{-2} \left(\dfrac{T}{10^4}\right)^{0.7}}{1 + 2.0 \times 10^{-4} \delta} \\
+   \alpha &= 0.944 \\
+   \beta &= \frac{0.735}{T^{0.068}} \\
+   \phi_{\mathrm{PAH}} &= 0.4
 
-The heating efficiency depends on the local FUV radiation field
-(converted internally from Draine to Habing units), the gas temperature,
-and the electron abundance.
+Physical Interpretation
+~~~~~~~~~~~~~~~~~~~~~~~
+
++----------------------+---------------------------------------------------------+
+| Term                 | Physical Process                                        |
++======================+=========================================================+
+| :math:`\epsilon G_0` | Efficiency of photon absorption and electron ejection   |
++----------------------+---------------------------------------------------------+
+| :math:`T^{\alpha}`   | Temperature dependence of electron recombination        |
++----------------------+---------------------------------------------------------+
+| :math:`\delta^{\beta}` | Balance between ionization and recombination rates     |
++----------------------+---------------------------------------------------------+
+| :math:`n_e n_{\mathrm{H}}` | Collision rate between electrons and PAHs           |
++----------------------+---------------------------------------------------------+
+| :math:`Z`            | Metallicity scaling of PAH abundance                   |
++----------------------+---------------------------------------------------------+
+
+Parameter Ranges and Notes
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- **Typical ranges**:
+  - :math:`G_0`: 0.1 to 10⁶ (Habing units)
+  - :math:`T`: 10 to 10⁴ K
+  - :math:`n_{\mathrm{H}}`: 0.1 to 10⁶ cm⁻³
+  - :math:`n_e/n_{\mathrm{H}}`: ~10⁻⁴ to 1 (ionization fraction)
+
+- **Physical meaning of** :math:`\delta`:
+  The parameter :math:`\delta` represents the ratio of ionization rate (proportional to :math:`G_0\sqrt{T}`) 
+  to recombination rate (proportional to :math:`n_e n_{\mathrm{H}}\phi_{\mathrm{PAH}}`).
+  
+  - When :math:`\delta \gg 1`: Ionization dominates → heating is efficient
+  - When :math:`\delta \ll 1`: Recombination dominates → cooling becomes important
+
+- **Efficiency** :math:`\epsilon`:
+  The efficiency function has two terms representing different physical regimes:
+  
+  1. First term: Dominates at low temperatures and moderate :math:`\delta`
+  2. Second term: Becomes important at high temperatures (:math:`T \gtrsim 10^4` K)
+
+
+Units
+~~~~~
+All quantities are in cgs units:
+
+- Heating rate: erg cm⁻³ s⁻¹
+- Densities: cm⁻³
+- Temperature: K
+- Radiation field: Habing units (1 Habing = :math:`1.6 \times 10^{-3}` erg cm⁻² s⁻¹)
+
 
 This term is stored as:
 

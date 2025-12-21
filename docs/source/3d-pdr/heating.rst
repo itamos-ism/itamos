@@ -2,7 +2,7 @@
 Heating Processes
 =================
 
-This file documents the heating terms implemented in the
+The file ``heatingfunctions.F90`` documents the heating terms implemented in the
 ``CALC_HEATING`` subroutine of the 3D-PDR code. Each heating mechanism
 contributes to the total volumetric heating rate of the gas
 (:math:`\mathrm{erg\ cm^{-3}\ s^{-1}}`) at a given grid cell, based on the
@@ -12,9 +12,10 @@ The total heating rate is computed as the sum of the individual
 processes described below.
 
 Only the heating mechanisms that are **active in the default energy
-balance** are described here. Dust photoelectric heating (classical),
-the Weingartner & Draine formulation, soft X-ray heating, and mechanical
-heating are intentionally omitted.
+balance** are described here. 
+
+.. 
+   Dust photoelectric heating (classical), the Weingartner & Draine formulation, soft X-ray heating, and mechanical heating are intentionally omitted.
 
 -------------------------
 Units and Conventions
@@ -36,7 +37,8 @@ PAH Photoelectric Heating
 
 Photoelectric heating from polycyclic aromatic hydrocarbons (PAHs) and
 very small grains is included using the formulation of
-Bakes & Tielens (1994), with updates from Wolfire et al. (2003, 2008).
+`Bakes & Tielens (1994) <https://ui.adsabs.harvard.edu/abs/1994ApJ...427..822B/abstract>`_, with updates from 
+`Wolfire et al. (2003) <https://ui.adsabs.harvard.edu/abs/2003ApJ...587..278W/abstract>`_.
 
 This mechanism accounts for both heating and cooling due to PAH charge
 exchange with the gas.

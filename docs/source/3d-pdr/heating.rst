@@ -639,6 +639,7 @@ Key References
 Physical Process
 ~~~~~~~~~~~~~~~~
 Gas particles (atoms, molecules, ions) collide with dust grains. A fraction of the particles "accommodate" to the grain temperature through inelastic interactions. The net energy transfer depends on:
+
 1. The gas-dust temperature difference
 2. The accommodation coefficient (probability of thermal accommodation)
 3. The grain surface area per unit volume

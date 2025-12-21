@@ -145,71 +145,152 @@ Parameter Ranges and Notes
   2. Second term: Becomes important at high temperatures (:math:`T \gtrsim 10^4` K)
 
 
-This term is stored as:
 
-- ``HEATING_RATE(2)`` — PAH photoelectric heating
 
 --------------------------------
 Carbon Photoionization Heating
 --------------------------------
 
-Photoionization of neutral carbon deposits kinetic energy into the gas.
-An average energy of 1 eV per ionization is assumed.
+This routine computes the heating from photoionization of carbon atoms. When UV photons ionize carbon atoms, the excess photon energy beyond the ionization potential is converted to kinetic energy of the ejected electron, which thermalizes through collisions.
 
-The heating rate is computed as
+The heating rate is given by:
 
 .. math::
+   \Gamma_{\mathrm{C,ion}} = E_{\mathrm{dep}} \times k_{\mathrm{C,phot}} \times n_{\mathrm{C}}
 
-   \boxed{\Gamma_{\rm heat} =
-   (1~{\rm eV}) \, k_{\rm ion}(C) \, n({\rm C}) \, n_{\rm H}}
+where:
 
-where the photoionization rate
-:math:`k_{\rm ion}(C)` is provided by the chemical network.
+- :math:`E_{\mathrm{dep}}` = 1.0 eV (average energy deposited as heat per ionization)
+- :math:`k_{\mathrm{C,phot}}` = Carbon photoionization rate (s⁻¹)
+- :math:`n_{\mathrm{C}}` = Carbon number density (cm⁻³)
 
-A numerical floor of :math:`10^{-30}` is imposed for stability.
+Complete Expression
+-------------------
 
-Stored as:
+.. math::
+   
+   \boxed{\Gamma_{\mathrm{C,ion}} = (1.0\ \mathrm{eV}) \times k_{\mathrm{C,phot}} \times f_{\mathrm{C}} \times n_{\mathrm{H}}}
 
-- ``HEATING_RATE(4)`` — carbon photoionization heating
+In terms of physical quantities:
+
+.. math::
+   \Gamma_{\mathrm{C,ion}} = 1.602 \times 10^{-12} \times k_{\mathrm{C,phot}} \times f_{\mathrm{C}} \times n_{\mathrm{H}}\ \mathrm{erg\ cm}^{-3}\ \mathrm{s}^{-1}
+
+The code implements a minimum value to prevent underflow:
+
+.. code-block:: fortran
+   
+   if (CIONIZATION_HEATING.lt.1d-30) CIONIZATION_HEATING=1d-30
+
+This ensures the heating rate never falls below :math:`10^{-30}` erg cm⁻³ s⁻¹.
+
+Notes
+~~~~~
+1. The value of 1.0 eV represents the average excess energy of ionizing photons beyond the carbon ionization potential (11.26 eV).
+2. This heating mechanism is important in diffuse atomic and ionized regions where carbon is a significant absorber of UV photons.
+3. The heating rate is proportional to the carbon abundance, which scales with metallicity.
+
+
 
 -------------------------
 H₂ Formation Heating
 -------------------------
 
-Molecular hydrogen formation on grain surfaces releases energy into the
-gas. A value of 1.5 eV per formed H₂ molecule is adopted
-(`Hollenbach & Tielens 1999 <https://ui.adsabs.harvard.edu/abs/1999RvMP...71..173H/abstract>`_).
+This routine computes the heating from molecular hydrogen formation on dust grain surfaces. When two hydrogen atoms combine on a grain surface to form H₂, the binding energy (4.48 eV) is released, with approximately 1.5 eV deposited as thermal energy into the gas. See `Hollenbach & Tielens (1999) <https://ui.adsabs.harvard.edu/abs/1999RvMP...71..173H/abstract>`_ for complete description.
 
-The heating rate is
+The heating rate follows:
 
 .. math::
+   \Gamma_{\mathrm{H_2,form}} = E_{\mathrm{dep}} \times k_{\mathrm{H_2,form}} \times n_{\mathrm{H}}^2 \times f_{\mathrm{H}}^2
 
-   \boxed{\Gamma_{\rm H_2,form} =
-   (1.5~{\rm eV}) \, k_{\rm gr} \, n({\rm H}) \, n_{\rm H}}
+where:
 
-where ``k_gr`` is the grain-surface formation rate coefficient.
+- :math:`E_{\mathrm{dep}}` = 1.5 eV (energy released as heat per H₂ formed)
+- :math:`k_{\mathrm{H_2,form}}` = H₂ formation rate coefficient on grains (cm³ s⁻¹)
+- :math:`n_{\mathrm{H}}` = Total hydrogen number density (cm⁻³)
+- :math:`f_{\mathrm{H}}` = Atomic hydrogen fractional abundance
 
-Stored as:
+Complete Expression
+~~~~~~~~~~~~~~~~~~~
 
-- ``HEATING_RATE(5)`` — H₂ formation heating
+.. math::
+   
+   \boxed{\Gamma_{\mathrm{H_2,form}} = (1.5\ \mathrm{eV}) \times k_{\mathrm{H_2,form}} \times n_{\mathrm{H}} \times f_{\mathrm{H}} \times n_{\mathrm{H}} \times f_{\mathrm{H}}}
+   
+   \Gamma_{\mathrm{H_2,form}} = (1.5\ \mathrm{eV}) \times k_{\mathrm{H_2,form}} \times f_{\mathrm{H}}^2 \times n_{\mathrm{H}}^2
+
+In terms of physical quantities:
+
+.. math::
+   \Gamma_{\mathrm{H_2,form}} = 2.403 \times 10^{-12} \times k_{\mathrm{H_2,form}} \times f_{\mathrm{H}}^2 \times n_{\mathrm{H}}^2\ \mathrm{erg\ cm}^{-3}\ \mathrm{s}^{-1}
+
+Physical Process Details
+~~~~~~~~~~~~~~~~~~~~~~~~
+1. **Energy release**: H₂ binding energy = 4.48 eV
+2. **Partitioning**:
+   - ~1.5 eV goes into heating the gas (through grain-gas collisions)
+   - ~0.2 eV goes into internal excitation of the newly formed H₂
+   - ~2.78 eV goes into heating the dust grain
+
+3. **Formation mechanism**: 
+   - Langmuir-Hinshelwood mechanism (mobile H atoms on grain surfaces)
+   - Eley-Rideal mechanism (gas-phase H atoms hitting adsorbed H atoms)
+
+Notes
+~~~~~~\
+1. H₂ formation heating is particularly important in photodissociation regions (PDRs) where H₂ forms efficiently.
+2. The heating scales as :math:`n^2`, making it dominant in dense regions.
+3. The rate coefficient :math:`k_{\mathrm{H_2,form}}` typically depends on dust temperature and grain properties.
+4. This heating mechanism couples the gas and dust temperatures through the formation process.
 
 ------------------------------
 H₂ Photodissociation Heating
 ------------------------------
 
-Photodissociation of H₂ deposits kinetic energy into the gas. An average
-energy of 0.4 eV per dissociation is assumed.
+This routine computes the heating from H₂ photodissociation. When H₂ molecules absorb far-ultraviolet (FUV) photons in the Lyman-Werner bands, they can dissociate, with some of the excess photon energy converted to thermal energy.
 
-The heating rate is
+The heating rate is given by:
 
 .. math::
+   \Gamma_{\mathrm{H_2,diss}} = E_{\mathrm{dep}} \times k_{\mathrm{H_2,phot}} \times n_{\mathrm{H_2}}
 
-   \boxed{\Gamma_{\rm H_2,diss} =
-   (0.4~{\rm eV}) \, k_{\rm diss} \, n({\rm H_2}) \, n_{\rm H}}
+where:
 
-Stored as:
+- :math:`E_{\mathrm{dep}}` = 0.4 eV (average energy deposited as heat per photodissociation)
+- :math:`k_{\mathrm{H_2,phot}}` = H₂ photodissociation rate (s⁻¹)
+- :math:`n_{\mathrm{H_2}}` = H₂ number density (cm⁻³)
 
-- ``HEATING_RATE(6)`` — H₂ photodissociation heating
+Complete Expression
+~~~~~~~~~~~~~~~~~~~
+
+.. math::
+   
+   \boxed{\Gamma_{\mathrm{H_2,diss}} = (0.4\ \mathrm{eV}) \times k_{\mathrm{H_2,phot}} \times f_{\mathrm{H_2}} \times n_{\mathrm{H}}}
+
+In terms of physical quantities:
+
+.. math::
+   \Gamma_{\mathrm{H_2,diss}} = 6.409 \times 10^{-13} \times k_{\mathrm{H_2,phot}} \times f_{\mathrm{H_2}} \times n_{\mathrm{H}}\ \mathrm{erg\ cm}^{-3}\ \mathrm{s}^{-1}
+
+Physical Process Details
+~~~~~~~~~~~~~~~~~~~~~~~~
+1. **Photodissociation mechanism**:
+   - H₂ absorbs FUV photon (11.2-13.6 eV) in Lyman-Werner bands
+   - Excited to electronic state, then decays to repulsive ground state
+   - Molecules dissociate into two H atoms
+
+2. **Energy partitioning**:
+   - H₂ dissociation energy = 4.48 eV
+   - Average photon energy ~12.4 eV
+   - Excess energy ~7.92 eV per photon
+   - ~0.4 eV ends up as thermal energy (rest goes into kinetic energy of H atoms)
+
+Notes
+~~~~~
+1. This heating mechanism is important in photon-dominated regions (PDRs) at the edges of molecular clouds.
+2. The photodissociation rate :math:`k_{\mathrm{H_2,phot}}` includes self-shielding effects for high H₂ column densities.
+3. H₂ photodissociation heating is typically smaller than H₂ FUV pumping heating (which uses 2.2 eV per excitation).
+4. This heating scales linearly with H₂ density and radiation field strength.
 
 -------------------------
 H₂ FUV Pumping Heating
@@ -298,10 +379,6 @@ Notes
 - The critical density calculation assumes H and H₂ are the dominant collision partners for H₂*.
 - This heating mechanism is particularly important in photon-dominated regions (PDRs) where FUV radiation is strong.
 
-Stored as:
-
-- ``HEATING_RATE(7)`` — H₂ FUV pumping heating
-
 ----------------------------
 Cosmic-Ray Heating
 ----------------------------
@@ -356,10 +433,6 @@ Notes
 2. The heating depends linearly on H₂ abundance, as H₂ is the primary target for cosmic rays in molecular gas.
 3. In predominantly atomic gas, the heating would need to be adjusted (though the current implementation assumes H₂-dominated regions).
 4. Cosmic-ray heating is particularly important in dense, shielded regions where UV heating is negligible.
-
-Stored as:
-
-- ``HEATING_RATE(8)`` — cosmic-ray heating
 
 -----------------------------
 Turbulent Dissipation Heating
@@ -441,10 +514,6 @@ Notes
 4. Turbulent heating can be comparable to or exceed other heating mechanisms in strongly turbulent regions.
 5. The heating rate scales linearly with density but cubically with velocity, making it very sensitive to the turbulent Mach number.
 
-
-Stored as:
-
-- ``HEATING_RATE(9)`` — turbulent heating
 
 -----------------------------
 Exothermic Reaction Heating
@@ -544,10 +613,6 @@ If you are using a custom chemical network:
 3. **Comment out the** ``STOP`` **statement** once indices are updated.
 4. **Verify** that all relevant species abundances (e.g., ``NH2x`` for H₂⁺) are defined in your network.
 5. **Add or remove reactions** as needed for your specific chemistry.
-
-Stored as:
-
-- ``HEATING_RATE(10)`` — chemical heating
 
 -------------------------------
 Gas–Grain Collisional Heating
@@ -661,10 +726,6 @@ The code also includes an alternative simplified expression from Tielens (2005):
 This is provided for comparison but not used in the primary calculation (commented out in the code).
 
 
-Stored as:
-
-- ``HEATING_RATE(11)`` — gas–grain collisional heating
-
 -------------------------
 Total Heating Rate
 -------------------------
@@ -677,6 +738,28 @@ active contributions:
    \boxed{\Gamma_{\rm total} =
    \sum_i \Gamma_i}
 
-Stored as:
+The table below provides the index of the heating rate for all the above functions. Note that indices 1 and 3 are missing because they do not contribute to the total heating.
 
-- ``HEATING_RATE(12)`` — total heating rate
++----------------------+--------------------------+----------------------------------------+
+| **Index**            | **Variable Name**        | **Physical Process**                   |
++======================+==========================+========================================+
+| ``HEATING_RATE(2)``  | ``PAHPHOTOELEC_HEATING`` | PAH photoelectric heating              |
++----------------------+--------------------------+----------------------------------------+
+| ``HEATING_RATE(4)``  | ``CIONIZATION_HEATING``  | Carbon photoionization heating         | 
++----------------------+--------------------------+----------------------------------------+
+| ``HEATING_RATE(5)``  | ``H2FORMATION_HEATING``  | H₂ formation heating                   |
++----------------------+--------------------------+----------------------------------------+
+| ``HEATING_RATE(6)``  | ``H2PHOTODISS_HEATING``  | H₂ photodissociation heating           |
++----------------------+--------------------------+----------------------------------------+
+| ``HEATING_RATE(7)``  | ``FUVPUMPING_HEATING``   | H₂ FUV pumping heating                 |
++----------------------+--------------------------+----------------------------------------+
+| ``HEATING_RATE(8)``  | ``COSMICRAY_HEATING``    | Cosmic-ray ionization heating          |
++----------------------+--------------------------+----------------------------------------+
+| ``HEATING_RATE(9)``  | ``TURBULENT_HEATING``    | Supersonic turbulent decay heating     |
++----------------------+--------------------------+----------------------------------------+
+| ``HEATING_RATE(10)`` | ``CHEMICAL_HEATING``     | Exothermic chemical reaction heating   |
++----------------------+--------------------------+----------------------------------------+
+| ``HEATING_RATE(11)`` | ``GASGRAIN_HEATING``     | Gas–grain collisional heating/cooling  |
++----------------------+--------------------------+----------------------------------------+
+| ``HEATING_RATE(12)`` | **Total Heating Rate**   | Sum of all heating mechanisms          |
++----------------------+--------------------------+----------------------------------------+

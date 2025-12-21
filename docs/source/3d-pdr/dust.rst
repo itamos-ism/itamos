@@ -9,7 +9,7 @@ The dust temperature is computed self-consistently for each grid
 particle by balancing heating from the local far-ultraviolet (FUV)
 radiation field, reprocessed infrared (IR) radiation, and the cosmic
 microwave background (CMB). The adopted formulation is based primarily
-on the work of Hollenbach, Takahashi & Tielens (1991), with important
+on the work of `Hollenbach, Takahashi & Tielens (1991; hereafter "HTT91") <https://ui.adsabs.harvard.edu/abs/1991ApJ...377..192H/abstract>`_, with important
 modifications to account for attenuation of the re-emitted IR radiation
 into the cloud.
 

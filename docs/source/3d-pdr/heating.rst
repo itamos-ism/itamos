@@ -380,21 +380,113 @@ Stored as:
 Gas–Grain Collisional Heating
 -------------------------------
 
-Collisions between gas particles and dust grains exchange thermal
-energy. This process can either heat or cool the gas, depending on the
-temperature difference.
+This routine computes the thermal energy exchange between gas and dust grains through inelastic collisions. When gas particles collide with dust grains, they may transfer kinetic energy to the grains (cooling the gas) or receive energy from the grains (heating the gas), depending on the relative temperatures.
 
-The formulation follows Burke & Hollenbach (1983), with a temperature-
-dependent accommodation coefficient.
 
-The heating rate scales as
+Key References
+~~~~~~~~~~~~~~
+- `Burke & Hollenbach (1983, ApJ, 265, 223) <https://ui.adsabs.harvard.edu/abs/1983ApJ...265..223B/abstract>`_; Primary formulation
+- `Groenewegen (1994, A&A, 290, 531) <https://ui.adsabs.harvard.edu/abs/1994A%26A...290..531G/abstract>`_; Accommodation coefficient fitting formula
+- `Hollenbach & McKee (1979, ApJS, 41, 555) <https://ui.adsabs.harvard.edu/abs/1979ApJS...41..555H/abstract>`_
+- `Tielens & Hollenbach (1985, ApJ, 291, 722) <https://ui.adsabs.harvard.edu/abs/1985ApJ...291..722T/abstract>`_
+- `Goldsmith (2001, ApJ, 557, 736) <https://ui.adsabs.harvard.edu/abs/2001ApJ...557..736G/abstract>`_
+- `Tielens (2005, "The Physics and Chemistry of the Interstellar Medium") <https://ui.adsabs.harvard.edu/abs/2005pcim.book.....T/abstract>`_
+
+
+Physical Process
+~~~~~~~~~~~~~~~~
+Gas particles (atoms, molecules, ions) collide with dust grains. A fraction of the particles "accommodate" to the grain temperature through inelastic interactions. The net energy transfer depends on:
+1. The gas-dust temperature difference
+2. The accommodation coefficient (probability of thermal accommodation)
+3. The grain surface area per unit volume
+4. The gas thermal velocity
+
+Mathematical Formulation (Burke & Hollenbach 1983)
+---------------------------------------------------
+
+1. **Number Density of Grains** (:math:`n_{\mathrm{grain}}`)
+
+   .. math::
+      n_{\mathrm{grain}} = 1.998 \times 10^{-12} \times n_{\mathrm{H}} \times Z
+
+   where:
+   
+   - :math:`n_{\mathrm{H}}` = Total hydrogen number density (cm⁻³)
+   - :math:`Z` = Metallicity relative to solar (linear scaling factor)
+   
+   This assumes a standard grain abundance scaling with metallicity.
+
+2. **Geometric Cross-Section per Grain** (:math:`C_{\mathrm{grain}}`)
+
+   .. math::
+      C_{\mathrm{grain}} = \pi a^2
+
+   where :math:`a` is the grain radius (assumed uniform in this implementation).
+
+3. **Thermal Accommodation Coefficient** (:math:`\alpha_T`)
+
+   Using Groenewegen (1994) fitting formula:
+   
+   .. math::
+      \alpha_T(T_{\mathrm{gas}}) = 0.37 \times \left[1 - 0.8 \exp\left(-\frac{75}{T_{\mathrm{gas}}}\right)\right]
+
+   This represents the probability that a gas particle thermalizes with the grain surface during a collision.
+
+4. **Gas-Grain Heating Rate** (erg cm⁻³ s⁻¹)
+
+   .. math::
+      \Gamma_{\mathrm{gas-grain}} = n_{\mathrm{grain}} C_{\mathrm{grain}} n_{\mathrm{H}}
+                                  \times v_{\mathrm{th}} \times \alpha_T
+                                  \times \left(2k_B T_{\mathrm{dust}} - 2k_B T_{\mathrm{gas}}\right)
+
+   where the mean thermal speed is:
+   
+   .. math::
+      v_{\mathrm{th}} = \sqrt{\frac{8k_B T_{\mathrm{gas}}}{\pi m_{\mathrm{H}}}}
+
+   with :math:`m_{\mathrm{H}}` being the mass of a hydrogen atom.
+
+Complete Combined Expression
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. math::
+   
+   \boxed{\Gamma_{\mathrm{gas-grain}} = n_{\mathrm{grain}} \pi a^2 n_{\mathrm{H}} 
+          \times \sqrt{\frac{8k_B T_{\mathrm{gas}}}{\pi m_{\mathrm{H}}}}
+          \times \alpha_T(T_{\mathrm{gas}})
+          \times 2k_B \left(T_{\mathrm{dust}} - T_{\mathrm{gas}}\right)}
+
+with:
 
 .. math::
+   n_{\mathrm{grain}} &= 1.998 \times 10^{-12} \times n_{\mathrm{H}} \times Z \\
+   \alpha_T(T_{\mathrm{gas}}) &= 0.37 \left[1 - 0.8 \exp\left(-\dfrac{75}{T_{\mathrm{gas}}}\right)\right]
 
-   \Gamma_{\rm gg} \propto
-   n_{\rm H} \, n_{\rm grain} \,
-   \sqrt{T_{\rm gas}} \,
-   (T_{\rm dust} - T_{\rm gas})
+Simplified Constant Pre-factor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Burke & Hollenbach (1983) note that the combination:
+
+.. math::
+   \sqrt{\frac{8k_B}{\pi m_{\mathrm{H}}}} \times 2k_B = 4.003 \times 10^{-12}\ \mathrm{cgs\ units}
+
+Thus the heating rate can also be written as:
+
+.. math::
+   \Gamma_{\mathrm{gas-grain}} = n_{\mathrm{grain}} \pi a^2 n_{\mathrm{H}}
+                               \times 4.003 \times 10^{-12} \sqrt{T_{\mathrm{gas}}}
+                               \times \alpha_T(T_{\mathrm{gas}})
+                               \times \left(T_{\mathrm{dust}} - T_{\mathrm{gas}}\right)
+
+Alternative Formulation (Tielens 2005)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The code also includes an alternative simplified expression from Tielens (2005):
+
+.. math::
+   \Gamma_{\mathrm{gas-grain}}^{\mathrm{(Tielens)}} = -1 \times 10^{-33} \times n_{\mathrm{H}}^2
+                                                    \times \sqrt{T_{\mathrm{gas}}}
+                                                    \times \left(T_{\mathrm{gas}} - T_{\mathrm{dust}}\right)
+
+This is provided for comparison but not used in the primary calculation (commented out in the code).
+
 
 Stored as:
 

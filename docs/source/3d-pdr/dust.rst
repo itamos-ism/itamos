@@ -34,8 +34,7 @@ realistic description of both the gas energetics and the chemistry.
 Adopted Formalism
 -------------------------
 
-The dust temperature calculation follows the treatment of
-Hollenbach, Takahashi & Tielens (1991, ApJ, 377, 192), who derive analytic
+The dust temperature calculation follows the treatment of HTT91, who derive analytic
 expressions for dust heating by FUV photons.
 
 For each particle, an initial contribution to the dust emission is

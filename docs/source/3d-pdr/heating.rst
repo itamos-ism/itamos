@@ -160,7 +160,7 @@ The heating rate is computed as
 
 .. math::
 
-   \Gamma_{\rm C^0} =
+   \Gamma_{\rm heat} =
    (1~{\rm eV}) \, k_{\rm ion}(C) \, n({\rm C}) \, n_{\rm H}
 
 where the photoionization rate
@@ -178,7 +178,7 @@ H₂ Formation Heating
 
 Molecular hydrogen formation on grain surfaces releases energy into the
 gas. A value of 1.5 eV per formed H₂ molecule is adopted
-(Hollenbach & Tielens 1999).
+(`Hollenbach & Tielens 1999 <https://ui.adsabs.harvard.edu/abs/1999RvMP...71..173H/abstract>`_).
 
 The heating rate is
 
@@ -215,20 +215,93 @@ Stored as:
 H₂ FUV Pumping Heating
 -------------------------
 
-FUV excitation of H₂ followed by collisional de-excitation contributes
-to gas heating. Each vibrationally excited H₂ molecule deposits on
-average 2.2 eV (Hollenbach & McKee 1979).
+This routine computes the heating due to Far-Ultraviolet (FUV) pumping of molecular hydrogen (H₂). When H₂ molecules absorb FUV photons, they are excited to higher vibrational/rotational states and subsequently decay collisionally, converting radiative energy into thermal energy.
 
-Collisional quenching is accounted for using a critical density
-formalism.
+Key Reference
+~~~~~~~~~~~~~
+- `Hollenbach & McKee (1979) <https://ui.adsabs.harvard.edu/abs/1979ApJS...41..555H/abstract>`_; Original formulation
 
-The heating rate is
+Each vibrationally excited H₂* molecule deposits approximately **2.2 eV** of energy into the gas through collisional de-excitation. The heating rate depends on:
+1. The H₂ photodissociation rate
+2. The critical density for collisional de-excitation
+3. The fractional abundance of H₂
+
+1. **Critical Density for H₂** (:math:`n_{\mathrm{cr,H₂}}`)
+
+   .. math::
+      n_{\mathrm{cr,H₂}} = \frac{10^6}{\sqrt{T}} \times \frac{1}{1.6 f_{\mathrm{H}} \exp\left[-\left(\dfrac{400}{T}\right)^2\right] 
+                          + 1.4 f_{\mathrm{H₂}} \exp\left[-\dfrac{18100}{T+1200}\right]}
+
+
+   The critical density represents the density at which collisional de-excitation competes with radiative decay.
+
+2. **FUV Pumping Heating Rate** (erg cm⁻³ s⁻¹)
+
+   .. math::
+      \Gamma_{\mathrm{FUV,pump}} = (2.2\ \mathrm{eV}) \times 9.0 \times k_{\mathrm{H₂,phot}} \times f_{\mathrm{H₂}} \times n_{\mathrm{H}}
+                                 \times \frac{1}{1 + \dfrac{n_{\mathrm{cr,H₂}}}{n_{\mathrm{H}}}}
+
+   where:
+   
+   - :math:`2.2\ \mathrm{eV} = 3.524 \times 10^{-12}` erg (energy per excited H₂*)
+   - :math:`k_{\mathrm{H₂,phot}}` = H₂ photodissociation rate (s⁻¹)
+
+Complete Combined Expression
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. math::
+   :label: h2_fuv_pumping_eq
+   
+   \boxed{\Gamma_{\mathrm{FUV,pump}} = \frac{(2.2\ \mathrm{eV}) \times 9.0 \times k_{\mathrm{H₂,phot}} \times f_{\mathrm{H₂}} \times n_{\mathrm{H}}}{1 + \dfrac{n_{\mathrm{cr,H₂}}}{n_{\mathrm{H}}}}}
 
-   \Gamma_{\rm pump} =
-   \frac{(2.2~{\rm eV}) \, 9 \, k_{\rm diss} \, n({\rm H_2}) \, n_{\rm H}}
-        {1 + n_{\rm cr}/n_{\rm H}}
+with:
+
+.. math::
+   n_{\mathrm{cr,H₂}} = \frac{10^6}{\sqrt{T}} \left[1.6 f_{\mathrm{H}} \exp\left(-\left(\frac{400}{T}\right)^2\right) 
+                      + 1.4 f_{\mathrm{H₂}} \exp\left(-\frac{18100}{T+1200}\right)\right]^{-1}
+
+
+Density Regimes
+~~~~~~~~~~~~~~~
+
+1. **Low-density limit** (:math:`n_{\mathrm{H}} \ll n_{\mathrm{cr,H₂}}`):
+   
+   .. math::
+      \Gamma_{\mathrm{FUV,pump}} \approx (2.2\ \mathrm{eV}) \times 9.0 \times k_{\mathrm{H₂,phot}} \times f_{\mathrm{H₂}} \times n_{\mathrm{H}} \times \frac{n_{\mathrm{H}}}{n_{\mathrm{cr,H₂}}}
+   
+   Heating is suppressed because excited H₂* decays radiatively before collisional de-excitation.
+
+2. **High-density limit** (:math:`n_{\mathrm{H}} \gg n_{\mathrm{cr,H₂}}`):
+   
+   .. math::
+      \Gamma_{\mathrm{FUV,pump}} \approx (2.2\ \mathrm{eV}) \times 9.0 \times k_{\mathrm{H₂,phot}} \times f_{\mathrm{H₂}} \times n_{\mathrm{H}}
+   
+   Heating is maximized as all excited H₂* molecules decay collisionally.
+
+Critical Density Components
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The critical density expression contains two terms:
+
+1. **Atomic hydrogen term**:
+   
+   .. math::
+      1.6 f_{\mathrm{H}} \exp\left[-\left(\dfrac{400}{T}\right)^2\right]
+   
+   Represents H-H₂ collisions. The exponential term accounts for the temperature dependence of the collision cross-section.
+
+2. **Molecular hydrogen term**:
+   
+   .. math::
+      1.4 f_{\mathrm{H₂}} \exp\left[-\dfrac{18100}{T+1200}\right]
+   
+   Represents H₂-H₂ collisions. The exponential term accounts for the energy barrier for vibrational de-excitation.
+
+
+Notes
+~~~~~
+- The factor of 9.0 comes from observations that there are approximately 9 excitations (FUV pumpings) per photodissociation event.
+- The critical density calculation assumes H and H₂ are the dominant collision partners for H₂*.
+- This heating mechanism is particularly important in photon-dominated regions (PDRs) where FUV radiation is strong.
 
 Stored as:
 

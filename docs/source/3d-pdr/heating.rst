@@ -364,6 +364,7 @@ This routine computes the heating from exothermic chemical reactions. When chemi
 For each exothermic reaction:
 :math:`\Gamma_{\mathrm{chem}} = n_1 n_2 \times k \times E`
 where:
+
 - :math:`n_1, n_2` = Number densities of reactants (cm⁻³)
 - :math:`k` = Reaction rate coefficient (cm³ s⁻¹)
 - :math:`E` = Energy released per reaction (erg)

@@ -322,8 +322,7 @@ The cosmic-ray heating rate is given by:
 
 where:
 
-1. **Energy deposited per ionization** (:math:`E_{\mathrm{dep}}`):
-   - : 9.4 eV
+1. **Energy deposited per ionization** (:math:`E_{\mathrm{dep}}`): :math:`E_{\mathrm{dep}}=9.4 \mathrm{eV}`
    
 2. **H₂ ionization rate** (:math:`\zeta_{\mathrm{H}_2}`): :math:`\zeta_{\mathrm{H}_2} = 1.3 \times 10^{-17} \times \zeta_{\mathrm{local}}\ \mathrm{s}^{-1}`, where :math:`\zeta_{\mathrm{local}}` is the local cosmic-ray ionization rate scaling factor.
 
@@ -339,8 +338,6 @@ Expressed in terms of physical quantities:
 .. math::
    \Gamma_{\mathrm{CR}} = 9.4 \times 1.602 \times 10^{-12} \times 1.3 \times 10^{-17} \times \zeta_{\mathrm{local}} \times n_{\mathrm{H}} \times f_{\mathrm{H}_2}\ \mathrm{erg\ cm}^{-3}\ \mathrm{s}^{-1}
 
-Numerical Constant
-~~~~~~~~~~~~~~~~~~
 The product of constants gives:
 
 .. math::
@@ -348,8 +345,6 @@ The product of constants gives:
 
 Thus: :math:`\Gamma_{\mathrm{CR}} = 1.958 \times 10^{-28} \times \zeta_{\mathrm{local}} \times n_{\mathrm{H}} \times f_{\mathrm{H}_2}`
 
-Energy Deposition Details
-~~~~~~~~~~~~~~~~~~~~~~~~~
 - Primary ionization by cosmic rays produces fast electrons (~30 eV)
 - These electrons cause secondary ionizations and excitations
 - Ultimately, ~9.4 eV per primary ionization ends up as thermal energy

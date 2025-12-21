@@ -34,8 +34,6 @@ realistic description of both the gas energetics and the chemistry.
 Adopted Formalism
 -------------------------
 
-### FUV and CMB Heating
-
 The dust temperature calculation follows the treatment of
 Hollenbach, Takahashi & Tielens (1991, ApJ, 377, 192), who derive analytic
 expressions for dust heating by FUV photons.

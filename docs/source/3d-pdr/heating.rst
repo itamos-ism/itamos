@@ -347,30 +347,124 @@ Stored as:
 - ``HEATING_RATE(9)`` — turbulent heating
 
 -----------------------------
-Chemical Heating
+Exothermic Reaction Heating
 -----------------------------
 
-Exothermic chemical reactions deposit energy into the gas. The dominant
-contributors are dissociative recombination and ion–neutral reactions,
-including:
+.. warning:: **INDEX DEPENDENCE ON CHEMICAL NETWORK**
+   
+   The rate indices (e.g., ``RATE(216)``, ``RATE(240)``) in this routine are **specific to each chemical network**. 
+   If you are designing or using a custom chemical network:
+   
+   1. **You must manually update all rate indices** to match your network's reaction numbering.
+   2. The indices differ between ``REDUCED``, ``MEDIUM``, ``FULL``, and custom networks.
+   3. The ``MYNETWORK`` section includes a ``STOP`` statement as a reminder to update these indices.
 
-- HCO⁺ + e⁻
-- H₃⁺ + e⁻
-- H₃O⁺ + e⁻
-- He⁺ + H₂
-- He⁺ + CO
+This routine computes the heating from exothermic chemical reactions. When chemical bonds form or rearrange, the released energy (reaction enthalpy) can be deposited as thermal energy into the gas.
 
-For each reaction, the heating rate is
+For each exothermic reaction:
+\[
+\Gamma_{\mathrm{chem}} = n_1 n_2 \times k \times E
+\]
+where:
+- :math:`n_1, n_2` = Number densities of reactants (cm⁻³)
+- :math:`k` = Reaction rate coefficient (cm³ s⁻¹)
+- :math:`E` = Energy released per reaction (erg)
+
+
+The code includes heating from six classes of exothermic reactions:
+
+1. **H₂⁺ recombination**: :math:`\mathrm{H}_2^+ + e^- \rightarrow \mathrm{H} + \mathrm{H}` (10.9 eV)
+2. **H₂⁺ charge transfer**: :math:`\mathrm{H}_2^+ + \mathrm{H} \rightarrow \mathrm{H}^+ + \mathrm{H}_2` (0.94 eV)
+3. **HCO⁺ recombination**: :math:`\mathrm{HCO}^+ + e^- \rightarrow \mathrm{CO} + \mathrm{H}` (7.51 eV)
+4. **H₃⁺ recombination**: :math:`\mathrm{H}_3^+ + e^- \rightarrow` products (4.76 + 9.23 eV total)
+5. **H₃O⁺ recombination**: :math:`\mathrm{H}_3\mathrm{O}^+ + e^- \rightarrow` products (1.16 + 5.63 + 6.27 eV total)
+6. **He⁺ ion-neutral reactions**: 
+   - :math:`\mathrm{He}^+ + \mathrm{H}_2 \rightarrow \mathrm{H}^+ + \mathrm{H} + \mathrm{He}` (6.51 eV)
+   - :math:`\mathrm{He}^+ + \mathrm{CO} \rightarrow \mathrm{C}^+ + \mathrm{O} + \mathrm{He}` (2.22 eV)
+
+Mathematical Expressions
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. math::
+   \Gamma_{\mathrm{chem}} = \sum_{i=1}^{8} \Gamma_i
 
-   \Gamma = n_1 \, n_2 \, k \, E
+where:
 
-where :math:`k` is the reaction rate coefficient and :math:`E` is the
-released energy.
+1. **H₂⁺ + e⁻ recombination**:
+   \[
+   \Gamma_1 = f_{\mathrm{H}_2^+} n_{\mathrm{H}} \times f_e n_{\mathrm{H}} \times k_1 \times (10.9\ \mathrm{eV})
+   \]
 
-The exact set of reactions depends on the selected chemical network
-(``REDUCED``, ``MEDIUM``, or ``FULL``).
+2. **H₂⁺ + H charge transfer**:
+   \[
+   \Gamma_2 = f_{\mathrm{H}_2^+} n_{\mathrm{H}} \times f_{\mathrm{H}} n_{\mathrm{H}} \times k_2 \times (0.94\ \mathrm{eV})
+   \]
+
+3. **HCO⁺ + e⁻ recombination**:
+   \[
+   \Gamma_3 = f_{\mathrm{HCO}^+} n_{\mathrm{H}} \times f_e n_{\mathrm{H}} \times k_3 \times (7.51\ \mathrm{eV})
+   \]
+
+4. **H₃⁺ + e⁻ recombination** (two channels):
+   \[
+   \Gamma_4 = f_{\mathrm{H}_3^+} n_{\mathrm{H}} \times f_e n_{\mathrm{H}} \times (k_{4a} \times 4.76\ \mathrm{eV} + k_{4b} \times 9.23\ \mathrm{eV})
+   \]
+
+5. **H₃O⁺ + e⁻ recombination** (three channels):
+   \[
+   \Gamma_5 = f_{\mathrm{H}_3\mathrm{O}^+} n_{\mathrm{H}} \times f_e n_{\mathrm{H}} \times (k_{5a} \times 1.16\ \mathrm{eV} + k_{5b} \times 5.63\ \mathrm{eV} + k_{5c} \times 6.27\ \mathrm{eV})
+   \]
+
+6. **He⁺ + H₂ reactions** (two channels):
+   \[
+   \Gamma_6 = f_{\mathrm{He}^+} n_{\mathrm{H}} \times f_{\mathrm{H}_2} n_{\mathrm{H}} \times (k_{6a} + k_{6b}) \times (6.51\ \mathrm{eV})
+   \]
+
+7. **He⁺ + CO reactions** (one to three channels depending on network):
+   \[
+   \Gamma_7 = f_{\mathrm{He}^+} n_{\mathrm{H}} \times f_{\mathrm{CO}} n_{\mathrm{H}} \times (\sum k_{7,i}) \times (2.22\ \mathrm{eV})
+   \]
+
+Network-Specific Rate Indices
+-----------------------------
+The reaction rate indices vary significantly between networks:
+
++-----------------+----------------+----------------+----------------+-------------------+
+| **Reaction**    | **REDUCED**    | **MEDIUM**     | **FULL**       | **MYNETWORK**     |
++=================+================+================+================+===================+
+| H₂⁺ + e⁻       | ``RATE(216)``  | ``RATE(255)``  | ``RATE(670)``  | Not included      |
++-----------------+----------------+----------------+----------------+-------------------+
+| H₂⁺ + H        | ``RATE(155)``  | ``RATE(11)``   | ``RATE(290)``  | Not included      |
++-----------------+----------------+----------------+----------------+-------------------+
+| HCO⁺ + e⁻      | ``RATE(240)``  | ``RATE(280)``  | ``RATE(730)``  | ``RATE(185)``     |
++-----------------+----------------+----------------+----------------+-------------------+
+| H₃⁺ + e⁻ (a)   | ``RATE(217)``  | ``RATE(266)``  | ``RATE(706)``  | ``RATE(173)``     |
++-----------------+----------------+----------------+----------------+-------------------+
+| H₃⁺ + e⁻ (b)   | ``RATE(218)``  | ``RATE(265)``  | ``RATE(705)``  | ``RATE(172)``     |
++-----------------+----------------+----------------+----------------+-------------------+
+| H₃O⁺ + e⁻ (a)  | ``RATE(236)``  | ``RATE(275)``  | ``RATE(717)``  | ``RATE(179)``     |
++-----------------+----------------+----------------+----------------+-------------------+
+| H₃O⁺ + e⁻ (b)  | ``RATE(237)``  | ``RATE(274)``  | ``RATE(716)``  | ``RATE(178)``     |
++-----------------+----------------+----------------+----------------+-------------------+
+| H₃O⁺ + e⁻ (c)  | ``RATE(238)``  | ``RATE(272)``  | ``RATE(714)``  | ``RATE(176)``     |
++-----------------+----------------+----------------+----------------+-------------------+
+| He⁺ + H₂ (a)   | ``RATE(50)``   | ``RATE(445)``  | ``RATE(1227)`` | ``RATE(297)``     |
++-----------------+----------------+----------------+----------------+-------------------+
+| He⁺ + H₂ (b)   | ``RATE(170)``  | ``RATE(96)``   | ``RATE(265)``  | ``RATE(67)``      |
++-----------------+----------------+----------------+----------------+-------------------+
+| He⁺ + CO       | 3 rates        | 1 rate         | 1 rate         | 1 rate            |
+|                 | ``(89,90,91)``| ``RATE(553)``  | ``RATE(1541)`` | ``RATE(364)``     |
++-----------------+----------------+----------------+----------------+-------------------+
+
+Custom Network Implementation Guide
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+If you are using a custom chemical network:
+
+1. **Locate the reaction numbers** in your network for the 8 key reactions above.
+2. **Update all ``RATE(i)`` indices** in the ``MYNETWORK`` section.
+3. **Comment out the ``STOP`` statement** once indices are updated.
+4. **Verify** that all relevant species abundances (e.g., ``NH2x`` for H₂⁺) are defined in your network.
+5. **Add or remove reactions** as needed for your specific chemistry.
 
 Stored as:
 

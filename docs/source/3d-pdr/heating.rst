@@ -228,16 +228,18 @@ Physical Process Details
 ~~~~~~~~~~~~~~~~~~~~~~~~
 1. **Energy release**: H₂ binding energy = 4.48 eV
 2. **Partitioning**:
+
    - ~1.5 eV goes into heating the gas (through grain-gas collisions)
    - ~0.2 eV goes into internal excitation of the newly formed H₂
    - ~2.78 eV goes into heating the dust grain
 
 3. **Formation mechanism**: 
+
    - Langmuir-Hinshelwood mechanism (mobile H atoms on grain surfaces)
    - Eley-Rideal mechanism (gas-phase H atoms hitting adsorbed H atoms)
 
 Notes
-~~~~~~\
+~~~~~
 1. H₂ formation heating is particularly important in photodissociation regions (PDRs) where H₂ forms efficiently.
 2. The heating scales as :math:`n^2`, making it dominant in dense regions.
 3. The rate coefficient :math:`k_{\mathrm{H_2,form}}` typically depends on dust temperature and grain properties.
@@ -275,11 +277,13 @@ In terms of physical quantities:
 Physical Process Details
 ~~~~~~~~~~~~~~~~~~~~~~~~
 1. **Photodissociation mechanism**:
+
    - H₂ absorbs FUV photon (11.2-13.6 eV) in Lyman-Werner bands
    - Excited to electronic state, then decays to repulsive ground state
    - Molecules dissociate into two H atoms
 
 2. **Energy partitioning**:
+
    - H₂ dissociation energy = 4.48 eV
    - Average photon energy ~12.4 eV
    - Excess energy ~7.92 eV per photon

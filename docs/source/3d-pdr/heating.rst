@@ -52,12 +52,13 @@ Key references
    .. math::
       \phi_{\mathrm{PAH}} = 0.4
 
-   *Note*: Setting :math:`\phi_{\mathrm{PAH}} = 1.0` recovers the original Bakes & Tielens (1994) formulation.
+   .. note:: 
+            Setting :math:`\phi_{\mathrm{PAH}} = 1.0` recovers the original Bakes & Tielens (1994) formulation.
 
 2. **Temperature-dependent Exponents**
 
    .. math::
-      \alpha &= 0.944
+      \alpha = 0.944
    
    .. math::
       \beta(T) = \frac{0.735}{T^{0.068}}
@@ -107,8 +108,7 @@ Combined Formula
 Substituting all components:
 
 .. math::
-   :label: pah_master_eq
-   
+      
    \boxed{\Gamma_{\mathrm{PE}} = Z \left[ 1.30 \times 10^{-24} \epsilon G_0 n_{\mathrm{H}} 
           - 4.65 \times 10^{-30} T^{\alpha} \delta^{\beta} n_e n_{\mathrm{H}} \phi_{\mathrm{PAH}} \right]}
 
@@ -121,23 +121,6 @@ with the auxiliary definitions:
    \alpha &= 0.944 \\
    \beta &= \frac{0.735}{T^{0.068}} \\
    \phi_{\mathrm{PAH}} &= 0.4
-
-Physical Interpretation
-~~~~~~~~~~~~~~~~~~~~~~~
-
-+----------------------+---------------------------------------------------------+
-| Term                 | Physical Process                                        |
-+======================+=========================================================+
-| :math:`\epsilon G_0` | Efficiency of photon absorption and electron ejection   |
-+----------------------+---------------------------------------------------------+
-| :math:`T^{\alpha}`   | Temperature dependence of electron recombination        |
-+----------------------+---------------------------------------------------------+
-| :math:`\delta^{\beta}` | Balance between ionization and recombination rates     |
-+----------------------+---------------------------------------------------------+
-| :math:`n_e n_{\mathrm{H}}` | Collision rate between electrons and PAHs           |
-+----------------------+---------------------------------------------------------+
-| :math:`Z`            | Metallicity scaling of PAH abundance                   |
-+----------------------+---------------------------------------------------------+
 
 Parameter Ranges and Notes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -152,24 +135,14 @@ Parameter Ranges and Notes
   The parameter :math:`\delta` represents the ratio of ionization rate (proportional to :math:`G_0\sqrt{T}`) 
   to recombination rate (proportional to :math:`n_e n_{\mathrm{H}}\phi_{\mathrm{PAH}}`).
   
-  - When :math:`\delta \gg 1`: Ionization dominates → heating is efficient
-  - When :math:`\delta \ll 1`: Recombination dominates → cooling becomes important
+  - When :math:`\delta \gg 1`: Ionization dominates so heating is efficient
+  - When :math:`\delta \ll 1`: Recombination dominates so cooling becomes important
 
 - **Efficiency** :math:`\epsilon`:
   The efficiency function has two terms representing different physical regimes:
   
   1. First term: Dominates at low temperatures and moderate :math:`\delta`
   2. Second term: Becomes important at high temperatures (:math:`T \gtrsim 10^4` K)
-
-
-Units
-~~~~~
-All quantities are in cgs units:
-
-- Heating rate: erg cm⁻³ s⁻¹
-- Densities: cm⁻³
-- Temperature: K
-- Radiation field: Habing units (1 Habing = :math:`1.6 \times 10^{-3}` erg cm⁻² s⁻¹)
 
 
 This term is stored as:

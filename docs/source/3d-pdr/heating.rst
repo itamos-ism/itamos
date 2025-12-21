@@ -160,8 +160,8 @@ The heating rate is computed as
 
 .. math::
 
-   \Gamma_{\rm heat} =
-   (1~{\rm eV}) \, k_{\rm ion}(C) \, n({\rm C}) \, n_{\rm H}
+   \boxed{\Gamma_{\rm heat} =
+   (1~{\rm eV}) \, k_{\rm ion}(C) \, n({\rm C}) \, n_{\rm H}}
 
 where the photoionization rate
 :math:`k_{\rm ion}(C)` is provided by the chemical network.
@@ -184,8 +184,8 @@ The heating rate is
 
 .. math::
 
-   \Gamma_{\rm H_2,form} =
-   (1.5~{\rm eV}) \, k_{\rm gr} \, n({\rm H}) \, n_{\rm H}
+   \boxed{\Gamma_{\rm H_2,form} =
+   (1.5~{\rm eV}) \, k_{\rm gr} \, n({\rm H}) \, n_{\rm H}}
 
 where ``k_gr`` is the grain-surface formation rate coefficient.
 
@@ -204,8 +204,8 @@ The heating rate is
 
 .. math::
 
-   \Gamma_{\rm H_2,diss} =
-   (0.4~{\rm eV}) \, k_{\rm diss} \, n({\rm H_2}) \, n_{\rm H}
+   \boxed{\Gamma_{\rm H_2,diss} =
+   (0.4~{\rm eV}) \, k_{\rm diss} \, n({\rm H_2}) \, n_{\rm H}}
 
 Stored as:
 

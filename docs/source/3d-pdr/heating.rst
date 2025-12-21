@@ -303,6 +303,7 @@ H₂ FUV Pumping Heating
 This routine computes the heating due to Far-Ultraviolet (FUV) pumping of molecular hydrogen (H₂). When H₂ molecules absorb FUV photons, they are excited to higher vibrational/rotational states and subsequently decay collisionally, converting radiative energy into thermal energy. See `Hollenbach & McKee (1979) <https://ui.adsabs.harvard.edu/abs/1979ApJS...41..555H/abstract>`_ for the original formulation.
 
 Each vibrationally excited H₂* molecule deposits approximately **2.2 eV** of energy into the gas through collisional de-excitation. The heating rate depends on:
+
 1. The H₂ photodissociation rate
 2. The critical density for collisional de-excitation
 3. The fractional abundance of H₂

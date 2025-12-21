@@ -382,6 +382,7 @@ The turbulent heating rate follows:
    \Gamma_{\mathrm{turb}} = \rho \times \frac{v_{\mathrm{turb}}^3}{L_{\mathrm{turb}}}
 
 where:
+
 - :math:`\rho` = Gas mass density (g cm⁻³)
 - :math:`v_{\mathrm{turb}}` = Turbulent velocity (cm s⁻¹)
 - :math:`L_{\mathrm{turb}}` = Turbulent driving scale (cm)
@@ -402,6 +403,7 @@ In terms of physical quantities:
    \Gamma_{\mathrm{turb}} = 3.5 \times 10^{-28} \times \left(\frac{v_{\mathrm{turb}}}{1\ \mathrm{km\ s}^{-1}}\right)^3 \times \left(\frac{1\ \mathrm{pc}}{L_{\mathrm{turb}}}\right) \times n_{\mathrm{H}}\ \mathrm{erg\ cm}^{-3}\ \mathrm{s}^{-1}
 
 The factor 3.5 × 10⁻²⁸ comes from:
+
 - Mass density: :math:`\rho = n_{\mathrm{H}} m_{\mathrm{H}}` (with :math:`m_{\mathrm{H}} = 1.67 \times 10^{-24}` g)
 - Velocity conversion: 1 km s⁻¹ = 10⁵ cm s⁻¹
 - Length conversion: 1 pc = 3.086 × 10¹⁸ cm
@@ -412,11 +414,13 @@ Turbulent Parameters
 ~~~~~~~~~~~~~~~~~~~~
 
 1. **Turbulent Velocity** (:math:`v_{\mathrm{turb}}`):
+
    - Galactic center: ~15 km s⁻¹
    - Typical molecular clouds: 1-5 km s⁻¹
    - Input units: km s⁻¹ (converted to cm s⁻¹ in formula)
 
 2. **Turbulent Scale Length** (:math:`L_{\mathrm{turb}}`):
+
    - Default: 5.0 pc (as set in code)
    - Typical range: 0.1-100 pc depending on environment
 

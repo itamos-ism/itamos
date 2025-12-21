@@ -501,8 +501,8 @@ active contributions:
 
 .. math::
 
-   \Gamma_{\rm total} =
-   \sum_i \Gamma_i
+   \boxed{\Gamma_{\rm total} =
+   \sum_i \Gamma_i}
 
 Stored as:
 

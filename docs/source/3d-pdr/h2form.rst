@@ -90,6 +90,7 @@ Notes
 -----
 
 - The function includes commented-out alternative formulations from:
+
   - Traditional rate with simple temperature dependence
   - de Jong (1977) treatment with exponential cutoff
   - Tielens & Hollenbach (1985) treatment

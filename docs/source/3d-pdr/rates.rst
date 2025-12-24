@@ -78,7 +78,7 @@ separately and does **not** use the standard Arrhenius form.
 Depending on compile-time options, the rate follows:
 
 - `Cazaux & Tielens (2002) <https://ui.adsabs.harvard.edu/abs/2002ApJ...575L..29C/abstract>`_; see detailed description :ref:`here <h2f>`,
-- a simplified temperature-dependent prescription given by :math:`3\times10^{-18}\sqrt{T_{\rm gas}}e^{-\frac{T_{\rm gas}}{10^3}}`, or
+- a simplified temperature-dependent prescription given by :math:`3\times10^{-18}\sqrt{T_{\rm gas}}e^{-\frac{T_{\rm gas}}{10^3 {\rm K}}}`, or
 - the rate of `Röllig et al. (2007) <https://ui.adsabs.harvard.edu/abs/2007A%26A...467..187R/abstract>`_ given by :math:`3\times10^{-18}\sqrt{T_{\rm gas}}`.
 
 The selected rate depends explicitly on both gas and dust temperatures.

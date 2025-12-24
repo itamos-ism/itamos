@@ -154,7 +154,7 @@ Second Section (Chemistry and Density Options)
 - **H2FORM**:
   Specifies the H₂ formation recipe:  
 
-  - ``CT02`` — Cazaux & Tielens (2002, 2004).  
+  - ``CT02`` — Cazaux & Tielens (`2002 <https://ui.adsabs.harvard.edu/abs/2002ApJ...575L..29C/abstract>`_, `2004 <https://ui.adsabs.harvard.edu/abs/2004ApJ...604..222C/abstract>`_); see detailed description :ref:`here <h2f>`.  
   - ``SIMPLE`` — simplified function (see ``makefile`` comments).  
   - ``R07`` — `Röllig et al. (2007) <https://ui.adsabs.harvard.edu/abs/2007A%26A...467..187R/abstract>`_ benchmark function.
 

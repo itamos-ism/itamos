@@ -190,17 +190,20 @@ The level population solver assumes:
 - Radiative trapping already included in the transition rates
   (e.g. via LVG escape probabilities)
 
-Role in the PDR Iteration Scheme
---------------------------------
-
-The solver is called as part of the iterative PDR solution loop:
-
-1. Chemistry update
-2. Temperature estimate
-3. Rate coefficient calculation
-4. **Level population solution (this module)**
-5. Cooling rate evaluation
-6. Thermal balance iteration
 
 Accurate convergence of the level populations is essential for reliable
 cooling rates and thermal balance.
+
+
+..
+   Role in the PDR Iteration Scheme
+   --------------------------------
+
+   The solver is called as part of the iterative PDR solution loop:
+
+   1. Chemistry update
+   2. Temperature estimate
+   3. Rate coefficient calculation
+   4. **Level population solution (this module)**
+   5. Cooling rate evaluation
+   6. Thermal balance iteration

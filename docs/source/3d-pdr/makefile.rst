@@ -161,7 +161,7 @@ Second Section (Chemistry and Density Options)
 - **CRATTENUATION**:
   Enables cosmic-ray attenuation.  
 
-  - ``1`` — uses `Padovani et al. (2018) <https://ui.adsabs.harvard.edu/abs/2018A%26A...614A.111P/abstract>`_ low/high models. Replace CRIR value in ``params.dat`` with *L* or *H*.  
+  - ``1`` — uses Padovani et al. (`2018 <https://ui.adsabs.harvard.edu/abs/2018A%26A...614A.111P/abstract>`_; `2024 <https://ui.adsabs.harvard.edu/abs/2024A%26A...682A.131P/abstract>`_) low/high models. Replace CRIR value in ``params.dat`` with ``L``, ``H`` or ``U``.  
   - ``0`` — uses constant CR ionization rate throughout the cloud.
 
 .. - ``2`` — uses a softened power-law model :math:`\zeta(N) = \zeta_0 \times (1 + N/N_0)^\alpha`. Specify :math:`\zeta_0`, :math:`N_0`, and :math:`\alpha` in ``params.dat``

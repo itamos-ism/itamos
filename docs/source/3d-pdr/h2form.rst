@@ -1,3 +1,5 @@
+.. _h2f:
+
 H2 Formation Treatment
 ======================
 

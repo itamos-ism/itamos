@@ -40,6 +40,7 @@ Welcome to the documentation of the ITAMOS project!
    3d-pdr/rates
    3d-pdr/changeTgas
    3d-pdr/shield
+   3d-pdr/levelpop
 
 .. toctree::
    :maxdepth: 3

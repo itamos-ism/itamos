@@ -50,7 +50,7 @@ Formulation
 .. math::
    R = 0.5 \times v_{th} \times (A_{sil}\eta_{sil} + A_{gra}\eta_{gra}) \times S \times Z
 
-   where :math:`Z` is the metallicity scaling factor equivalent to the dust-to-gas ratio normalized to :math:`10^{-2}`.
+where :math:`Z` is the metallicity scaling factor equivalent to the dust-to-gas ratio normalized to :math:`10^{-2}`.
 
 Parameters Used
 ---------------

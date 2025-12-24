@@ -31,8 +31,8 @@ Inputs and Outputs
 
 - ``TEMPERATURE``: gas temperature (K)
 - ``DUST_TEMPERATURE``: dust temperature (K)
-- ``RAD_SURFACE(J)``: incident radiation field along ray *J*
-- ``AV(J)``: visual extinction along ray *J*
+- ``RAD_SURFACE(J)``: incident radiation field along ray ``J``
+- ``AV(J)``: visual extinction along ray ``J``
 - ``COLUMN_NH2``, ``COLUMN_NHD``, ``COLUMN_NCO``, ``COLUMN_NC``,
   ``COLUMN_NS``: column densities along rays
 - ``ALPHA``, ``BETA``, ``GAMMA``: Arrhenius-type reaction parameters
@@ -42,7 +42,7 @@ Inputs and Outputs
 
 **Outputs**
 
-- ``RATE(I)``: rate coefficient for reaction *I*
+- ``RATE(I)``: rate coefficient for reaction ``I``
 - Stored indices for key reactions:
   ``NRGR``, ``NRH2``, ``NRHD``, ``NRCO``, ``NRCI``, ``NRSI``
 

@@ -1,5 +1,5 @@
-Escape Probability and Line Cooling (LVG Approximation)
-======================================================
+Escape Probability and Line Cooling
+===================================
 
 Overview
 --------
@@ -92,7 +92,7 @@ where:
 
 In the code, this is accumulated as ``tau_ij(j)``.
 
-ONEDIMENSIONAL Geometry
+One-dimensional models
 ^^^^^^^^^^^^^^^^^^^^^^
 
 When the ``ONEDIMENSIONAL`` flag is enabled:

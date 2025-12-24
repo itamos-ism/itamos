@@ -48,8 +48,6 @@ by the **particle conservation constraint**:
 where :math:`n_\mathrm{species}` is the total number density of the
 species.
 
----
-
 Transition Rate Matrix
 ----------------------
 
@@ -82,8 +80,6 @@ and right-hand side:
 
 except for the normalization equation (see below).
 
----
-
 Normalization Constraint
 ------------------------
 
@@ -106,7 +102,6 @@ where :math:`\epsilon = 10^{-8}` is a small scaling factor used to:
 - preserve numerical conditioning,
 - leave the physical solution unchanged.
 
----
 
 Numerical Solution
 ------------------
@@ -124,8 +119,6 @@ Key properties of the solver:
 On output, the solution vector contains the level populations
 :math:`n_i`.
 
----
-
 Negative Population Handling
 ----------------------------
 
@@ -139,8 +132,6 @@ removed by enforcing:
 
 This correction does not affect the solution when populations are well
 converged.
-
----
 
 Subroutine: ``solvlevpop``
 --------------------------
@@ -164,8 +155,6 @@ Subroutine: ``solvlevpop``
 - ``SOLUTION(NLEV)``  
   Level populations :math:`n_i`.
 
----
-
 Subroutine: ``GAUSS_JORDAN``
 ----------------------------
 
@@ -175,8 +164,6 @@ vector is replaced by the solution.
 
 The solver stops if a singular matrix is detected, which generally
 indicates an unphysical state (e.g. vanishing density or temperature).
-
----
 
 Debugging Variant: ``GAUSS_JORDAN_writes``
 ------------------------------------------
@@ -191,8 +178,6 @@ instabilities. In addition to solving the system, it:
 This routine is intended for debugging purposes only and is not used in
 production runs.
 
----
-
 Physical Assumptions
 --------------------
 
@@ -204,8 +189,6 @@ The level population solver assumes:
 - No explicit maser saturation
 - Radiative trapping already included in the transition rates
   (e.g. via LVG escape probabilities)
-
----
 
 Role in the PDR Iteration Scheme
 --------------------------------
@@ -221,6 +204,3 @@ The solver is called as part of the iterative PDR solution loop:
 
 Accurate convergence of the level populations is essential for reliable
 cooling rates and thermal balance.
-
----
-

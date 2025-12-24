@@ -2,11 +2,7 @@
 Reaction Rate Calculations
 =============================
 
-This file documents the computation of chemical reaction rate
-coefficients in the ``CALCULATE_REACTION_RATES`` subroutine of the
-3D-PDR code.
-
-The routine evaluates the rate coefficients for **all reactions in the
+The ``CALCULATE_REACTION_RATES`` subroutine evaluates the rate coefficients for **all reactions in the
 chemical network** at the local gas temperature, dust temperature,
 radiation field, visual extinction, and column densities. The resulting
 rates are used by the chemical solver to advance the abundances.
@@ -24,8 +20,8 @@ Scope and General Philosophy
 - Photodissociation of H\ :sub:`2` and CO, and photoionization of C and S,
   are treated **explicitly with shielding and ray tracing**, rather than
   via simple analytic fits.
-- X-ray–induced reactions follow the treatment of
-  Meijerink & Spaans (2005).
+..
+  - X-ray–induced reactions follow the treatment of  Meijerink & Spaans (2005).
 
 --------------------------------
 Inputs and Outputs

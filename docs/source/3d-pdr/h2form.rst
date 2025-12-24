@@ -23,10 +23,10 @@ This routine is activated when the ``H2FORM = CT02`` flag is specified in the ``
    - Accounts for competition between H₂ formation, desorption, and surface diffusion
    - Includes the fraction of newly formed H₂ that remains on grains (μ = 0.005)
 
-Key Equations
--------------
+Formulation
+-----------
 
-**Sticking Coefficient** (Hollenbach & McKee 1979):
+**Sticking Coefficient** (`Hollenbach & McKee (1979) <https://ui.adsabs.harvard.edu/abs/1979ApJS...41..555H/abstract>`_):
 
 .. math::
    S = \frac{1}{1 + 0.04\sqrt{T_g + T_d} + 0.2(T_g/100) + 0.08(T_g/100)^2}
@@ -50,20 +50,24 @@ Key Equations
 .. math::
    R = 0.5 \times v_{th} \times (A_{sil}\eta_{sil} + A_{gra}\eta_{gra}) \times S \times Z
 
-   where :math:`Z` is the metallicity scaling factor.
+   where :math:`Z` is the metallicity scaling factor equivalent to the dust-to-gas ratio normalized to :math:`10^{-2}`.
 
 Parameters Used
 ---------------
 
-=============== ============= ===================================================
-Parameter       Value         Description
-=============== ============= ===================================================
-Flux (F)        1.0×10⁻¹⁰     H atom flux in monolayers per second
-A_silicate     8.473×10⁻²²    Silicate grain cross section per H nucleus (cm²)
-A_graphite     7.908×10⁻²²    Graphite grain cross section per H nucleus (cm²)
-=============== ============= ===================================================
++--------------+--------------+---------------------------------------------------+
+| Parameter    |   Value      |  Description                                      |
++--------------+--------------+---------------------------------------------------+
+| Flux (F)     |   1.0×10⁻¹⁰  |  H atom flux in monolayers per second             |
++--------------+--------------+---------------------------------------------------+
+| A_silicate   |  8.473×10⁻²² |  Silicate grain cross section per H nucleus (cm²) |
++--------------+--------------+---------------------------------------------------+
+| A_graphite   |  7.908×10⁻²² |  Graphite grain cross section per H nucleus (cm²) |
++--------------+--------------+---------------------------------------------------+
+
 
 **Silicate Grain Properties**:
+
   - μ (retention fraction): 0.005
   - E_S (saddle energy): 110 K
   - E_H2 (H₂ desorption): 320 K
@@ -73,6 +77,7 @@ A_graphite     7.908×10⁻²²    Graphite grain cross section per H nucleus (c
   - ν_HC (H vibration): 1.3×10¹³ s⁻¹
 
 **Graphite Grain Properties**:
+
   - μ (retention fraction): 0.005
   - E_S (saddle energy): 260 K
   - E_H2 (H₂ desorption): 520 K
@@ -80,34 +85,6 @@ A_graphite     7.908×10⁻²²    Graphite grain cross section per H nucleus (c
   - E_HC (chemisorbed H): 30000 K
   - ν_H2 (H₂ vibration): 3.0×10¹² s⁻¹
   - ν_HC (H vibration): 1.3×10¹³ s⁻¹
-
-Usage Example
--------------
-
-.. code-block:: fortran
-
-   use definitions
-   real(kind=dp) :: gas_temp, grain_temp, formation_rate
-   
-   gas_temp = 100.0_dp    ! 100 K
-   grain_temp = 20.0_dp   ! 20 K
-   
-   formation_rate = H2_FORMATION_RATE(gas_temp, grain_temp)
-
-References
-----------
-
-1. Cazaux, S., & Tielens, A. G. G. M. 2002, ApJ, 575, L29
-   "Molecular hydrogen formation in the interstellar medium"
-
-2. Cazaux, S., & Tielens, A. G. G. M. 2004, ApJ, 604, 222
-   "H₂ formation on grain surfaces"
-
-3. Hollenbach, D., & McKee, C. F. 1979, ApJS, 41, 555
-   "Molecular formation and infrared emission in fast interstellar shocks"
-
-4. Tielens, A. G. G. M., & Hollenbach, D. 1985, ApJ, 291, 722
-   "Photodissociation regions. I. Basic model"
 
 Notes
 -----
@@ -123,10 +100,3 @@ Notes
 
 - The line ``!RATE = RATE / 3.0`` is commented out but represents a potential
   normalization adjustment used in some studies.
-
-Dependencies
-------------
-
-- ``DEFINITIONS`` module: Defines precision kind ``DP``
-- ``HEALPIX_TYPES`` module: Additional type definitions
-- ``GLOBAL_MODULE``: Provides ``metallicity`` variable

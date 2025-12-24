@@ -17,8 +17,6 @@ treated in the code (e.g. CO, CI, CII, OI, SI).
 The solution assumes steady state (time-independent) excitation and
 includes both **collisional** and **radiative** processes.
 
----
-
 Statistical Equilibrium Equations
 ---------------------------------
 

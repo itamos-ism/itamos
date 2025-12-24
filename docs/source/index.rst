@@ -35,8 +35,8 @@ Welcome to the documentation of the ITAMOS project!
    3d-pdr/examples
    3d-pdr/heating
    3d-pdr/dust
-   ..
-     3d-pdr/rates
+   3d-pdr/h2form
+   3d-pdr/rates
 
 .. toctree::
    :maxdepth: 3

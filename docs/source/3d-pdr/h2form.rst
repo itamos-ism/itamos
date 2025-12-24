@@ -97,6 +97,3 @@ Notes
 
 - Metallicity scaling is applied to the final rate, assuming linear dependence
   on metal abundance relative to solar.
-
-- The line ``!RATE = RATE / 3.0`` is commented out but represents a potential
-  normalization adjustment used in some studies.

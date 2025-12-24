@@ -38,6 +38,7 @@ Welcome to the documentation of the ITAMOS project!
    3d-pdr/dust
    3d-pdr/h2form
    3d-pdr/rates
+   3d-pdr/changeTgas
 
 .. toctree::
    :maxdepth: 3

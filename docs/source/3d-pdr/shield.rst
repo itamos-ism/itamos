@@ -1,5 +1,5 @@
-Photodissociation, Photoionization, and Shielding Functions
-===========================================================
+Shielding Functions
+===================
 
 Overview
 --------

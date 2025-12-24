@@ -77,7 +77,7 @@ separately and does **not** use the standard Arrhenius form.
 
 Depending on compile-time options, the rate follows:
 
-- `Cazaux & Tielens (2002) <https://ui.adsabs.harvard.edu/abs/2002ApJ...575L..29C/abstract>`_; see detailed description :ref:`here <h2form>`,
+- `Cazaux & Tielens (2002) <https://ui.adsabs.harvard.edu/abs/2002ApJ...575L..29C/abstract>`_; see detailed description :ref:`here <h2f>`,
 - a simplified temperature-dependent prescription, or
 - the rate of `Röllig et al. (2007) <https://ui.adsabs.harvard.edu/abs/2007A%26A...467..187R/abstract>`_.
 

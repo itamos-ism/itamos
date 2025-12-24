@@ -1,5 +1,5 @@
-H2 Formation
-============
+H2 Formation Treatment
+======================
 
 This routine is activated when the ``H2FORM = CT02`` flag is specified in the ``config.mk``. The function implements the detailed H₂ formation model developed by
 `Cazaux & Tielens <https://ui.adsabs.harvard.edu/abs/2002ApJ...575L..29C/abstract>`_, which accounts for:

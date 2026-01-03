@@ -20,4 +20,4 @@ The ITAMOS project includes the following publicly available codes:
 * **RAYTHEIA**\ : Stand-alone State-of-the-art ray-tracing algorithm included in 3D-PDR
 * **RT-tool**\ : Estimate radiation temperatures from one-dimensional PDR models
 * **RT-synth**\ : Construct synthetic observations from three-dimensional PDR models
-* **PDFchem**\ : Estimate PDR diagnostics from entire column density distributions as inputs
+* **PDFchem**\ : Estimate PDR diagnostics from entire column density distributions as inputs (new version to be released soon)

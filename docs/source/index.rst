@@ -10,6 +10,7 @@ Welcome to the documentation of the ITAMOS project!
    :maxdepth: 3
    :caption: INTRODUCTION:
 
+   introduction/itamos
    introduction/pdrs
    introduction/rt
 

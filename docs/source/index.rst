@@ -16,12 +16,6 @@ Welcome to the documentation of the ITAMOS project!
 
 .. toctree::
    :maxdepth: 3
-   :caption: RAYTHEIA:
-
-   raytheia/raytheia
-
-.. toctree::
-   :maxdepth: 3
    :caption: 3D-PDR:
 
    3d-pdr/3dpdr
@@ -42,6 +36,12 @@ Welcome to the documentation of the ITAMOS project!
    3d-pdr/changeTgas
    3d-pdr/shield
    3d-pdr/levelpop
+
+.. toctree::
+   :maxdepth: 3
+   :caption: RAYTHEIA:
+
+   raytheia/raytheia
 
 .. toctree::
    :maxdepth: 3

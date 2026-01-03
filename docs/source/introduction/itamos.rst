@@ -13,3 +13,11 @@ processes, under conditions of extreme complexity.
 
 The ITAMOS project addresses this challenge by advancing computational techniques, such as ray-tracing and high-performance programming, to create highly efficient and precise simulation tools. 
 These tools are designed to model PDRs at unprecedented levels of chemical detail and spatial resolution, enabling new insights into their structure and behavior.
+
+The ITAMOS project includes the following publicly available codes:
+
+* **3D-PDR**\ : Modelling photodissociation regions in one- and three-dimensional density distributions
+* **RAYTHEIA**\ : Stand-alone State-of-the-art ray-tracing algorithm included in 3D-PDR
+* **RT-tool**\ : Estimate radiation temperatures from one-dimensional PDR models
+* **RT-synth**\ : Construct synthetic observations from three-dimensional PDR models
+* **PDFchem**\ : Estimate PDR diagnostics from entire column density distributions as inputs

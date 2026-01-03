@@ -17,7 +17,7 @@ These tools are designed to model PDRs at unprecedented levels of chemical detai
 The ITAMOS project includes the following publicly available codes:
 
 * **3D-PDR**\ : Modelling photodissociation regions in one- and three-dimensional density distributions
-* **RAYTHEIA**\ : Stand-alone State-of-the-art ray-tracing algorithm included in 3D-PDR
+* **RAYTHEIA**\ : Stand-alone state-of-the-art ray-tracing algorithm included in 3D-PDR
 * **RT-tool**\ : Estimate radiation temperatures from one-dimensional PDR models
 * **RT-synth**\ : Construct synthetic observations from three-dimensional PDR models
 * **PDFchem**\ : Estimate PDR diagnostics from entire column density distributions as inputs (new version to be released soon)

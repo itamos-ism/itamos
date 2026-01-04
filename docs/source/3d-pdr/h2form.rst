@@ -96,7 +96,7 @@ Notes
   - Traditional rate with simple temperature dependence
   - `de Jong (1977) <https://ui.adsabs.harvard.edu/abs/1977A%26A....55..137D/abstract>`_ treatment with exponential cutoff
   - `Tielens & Hollenbach (1985) <https://ui.adsabs.harvard.edu/abs/1985ApJ...291..722T/abstract>`_ treatment
-  - Expression from the 2012 Leiden workshop
+  - The 2012 Leiden workshop
 
 - Metallicity scaling is applied to the final rate, assuming linear dependence
   on metal abundance relative to solar.

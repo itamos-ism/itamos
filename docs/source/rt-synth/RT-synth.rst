@@ -1,3 +1,5 @@
+.. _sec-rtsynth:
+
 The RT-synth Algorithm
 ======================
 

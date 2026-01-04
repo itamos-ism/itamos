@@ -88,7 +88,7 @@ PAH-Related Reactions
 --------------------------------
 
 Reactions involving PAHs (neutral or charged) follow the prescription
-of Wolfire et al. (2003, 2008).
+of Wolfire et al. (`2003 <https://ui.adsabs.harvard.edu/abs/2003ApJ...587..278W/abstract>`_, `2008 <https://ui.adsabs.harvard.edu/abs/2008ApJ...680..384W/abstract>`_).
 
 The rate is given by:
 
@@ -104,7 +104,7 @@ Suprathermal Ion–Neutral Reactions
 --------------------------------
 
 Optionally, suprathermal chemistry is included following
-Visser et al. (2009).
+`Visser et al. (2009) <https://ui.adsabs.harvard.edu/abs/2009A%26A...503..323V/abstract>`_.
 
 For ion–neutral reactions at low visual extinction, the effective
 temperature is increased by a contribution proportional to the Alfvén
@@ -129,11 +129,12 @@ Photoreaction rates are computed by **explicit ray integration**:
 
 where the sum runs over all rays *J*.
 
-### Special Cases
+Special Cases
+~~~~~~~~~~~~~
 
 The following reactions are treated with dedicated shielding functions:
 
-- **H\ :sub:`2` photodissociation**  
+- **H2 photodissociation**  
   Computed using ``H2PDRATE`` and self-shielding by H\ :sub:`2`.
 
 - **HD photodissociation**  
@@ -199,20 +200,23 @@ The general scaling is:
 Desorption Processes
 --------------------------------
 
-### Cosmic-Ray Desorption
+Cosmic-Ray Desorption
+~~~~~~~~~~~~~~~~~~~~~
 
 Desorption due to transient grain heating by cosmic rays follows
 Roberts et al. (2007), with a fixed cosmic-ray flux and a temperature-
 dependent yield.
 
-### Photodesorption
+Photodesorption
+~~~~~~~~~~~~~~~
 
 Photodesorption rates depend on:
 
 - dust temperature (via the yield),
 - attenuated FUV flux along each ray.
 
-### Thermal Desorption
+Thermal Desorption
+~~~~~~~~~~~~~~~~~~
 
 Thermal evaporation from grains follows
 Hasegawa, Herbst & Leung (1992) and depends exponentially on the

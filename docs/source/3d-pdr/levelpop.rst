@@ -165,19 +165,6 @@ vector is replaced by the solution.
 The solver stops if a singular matrix is detected, which generally
 indicates an unphysical state (e.g. vanishing density or temperature).
 
-Debugging Variant: ``GAUSS_JORDAN_writes``
-------------------------------------------
-
-A diagnostic version of the solver is provided for debugging numerical
-instabilities. In addition to solving the system, it:
-
-- Prints the rate matrix and right-hand side
-- Outputs intermediate elimination steps
-- Reports the gas temperature and grid point on failure
-
-This routine is intended for debugging purposes only and is not used in
-production runs.
-
 Physical Assumptions
 --------------------
 

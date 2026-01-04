@@ -7,10 +7,6 @@ chemical network** at the local gas temperature, dust temperature,
 radiation field, visual extinction, and column densities. The resulting
 rates are used by the chemical solver to advance the abundances.
 
---------------------------------
-Scope and General Philosophy
---------------------------------
-
 - Reaction rates depend on **local physical conditions**:
   gas temperature, dust temperature, radiation field, extinction,
   column densities, electron density, and cosmic-ray ionization rate.

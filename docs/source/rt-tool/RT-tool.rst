@@ -1,3 +1,5 @@
+.. _sec-rttool:
+
 The RT-tool Algorithm
 =====================
 

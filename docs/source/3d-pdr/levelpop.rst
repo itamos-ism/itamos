@@ -1,9 +1,6 @@
 Level Population Solver
 ======================
 
-Overview
---------
-
 This module solves the **statistical equilibrium equations** for the
 excitation of atomic or molecular species with an arbitrary number of
 energy levels.  The solver is used after the chemistry and gas

@@ -1,3 +1,5 @@
+.. _sec-3dpdr:
+
 The 3D-PDR code
 ===============
 

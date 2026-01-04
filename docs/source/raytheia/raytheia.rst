@@ -1,3 +1,5 @@
+.. _sec-raytheia:
+
 The RAYTHEIA algorithm
 ======================
 

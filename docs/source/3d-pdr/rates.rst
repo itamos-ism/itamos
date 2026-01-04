@@ -204,7 +204,7 @@ Cosmic-Ray Desorption
 ~~~~~~~~~~~~~~~~~~~~~
 
 Desorption due to transient grain heating by cosmic rays follows
-Roberts et al. (2007), with a fixed cosmic-ray flux and a temperature-
+`Roberts et al. (2007) <https://ui.adsabs.harvard.edu/abs/2007MNRAS.382..733R/abstract>`_, with a fixed cosmic-ray flux and a temperature-
 dependent yield.
 
 Photodesorption
@@ -219,7 +219,7 @@ Thermal Desorption
 ~~~~~~~~~~~~~~~~~~
 
 Thermal evaporation from grains follows
-Hasegawa, Herbst & Leung (1992) and depends exponentially on the
+`Hasegawa, Herbst & Leung (1992) <https://ui.adsabs.harvard.edu/abs/1992ApJS...82..167H/abstract>`_ and depends exponentially on the
 dust temperature:
 
 .. math::
@@ -242,7 +242,7 @@ Grain-Assisted Recombination
 --------------------------------
 
 Optionally, grain-assisted recombination of H\ :sup:`+`, He\ :sup:`+`,
-and C\ :sup:`+` is included following Gong et al. (2017).
+and C\ :sup:`+` is included following `Gong et al. (2017) <https://ui.adsabs.harvard.edu/abs/2017ApJ...843...38G/abstract>`_.
 
 These rates depend on:
 

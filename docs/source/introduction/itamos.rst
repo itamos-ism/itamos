@@ -18,7 +18,7 @@ These tools are designed to model PDRs at unprecedented levels of chemical detai
 The ITAMOS project includes the following publicly available codes:
 
 * :ref:`3D-PDR <sec-3dpdr>`: Modelling PDR chemistry in one and three dimensions
-* :ref:`RAYTHEIA <sec-raytheia>` : Stand-alone state-of-the-art ray-tracing algorithm included in 3D-PDR
-* :ref:`RT-tool <sec-rttool>` : Estimate radiation temperatures from one-dimensional PDR models
-* :ref:`RT-synth <sec-rtsynth>` : Construct synthetic observations from three-dimensional PDR models
-* `PDFchem <https://github.com/tbisbas/PDFchem>`_ : Estimate PDR diagnostics from entire column density distributions as inputs (new version to be released soon)
+* :ref:`RAYTHEIA <sec-raytheia>`: Stand-alone state-of-the-art ray-tracing algorithm included in 3D-PDR
+* :ref:`RT-tool <sec-rttool>`: Estimate radiation temperatures from one-dimensional PDR models
+* :ref:`RT-synth <sec-rtsynth>`: Construct synthetic observations from three-dimensional PDR models
+* `PDFchem <https://github.com/tbisbas/PDFchem>`_: Estimate PDR diagnostics from entire column density distributions as inputs (new version to be released soon)

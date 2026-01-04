@@ -76,14 +76,14 @@ This prescription follows the infrared-only dust temperature
 approximation of Rowan-Robinson (1980).
 
 The contribution from each ray is added to the total dust emission using
-the modified HTT (1991) formulation, which depends on the effective dust
+the modified HTT91 formulation, which depends on the effective dust
 optical depth at 100 μm.
 
 -------------------------
 Infrared Attenuation
 -------------------------
 
-In the original HTT (1991) treatment, the infrared radiation re-emitted
+In the original HTT91 treatment, the infrared radiation re-emitted
 by dust at the cloud surface is not attenuated as it propagates deeper
 into the cloud. This leads to unrealistically high dust (and therefore
 gas) temperatures at large depths for high-density, high-FUV models.

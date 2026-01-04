@@ -259,7 +259,7 @@ The wavelength is constrained to:
 
 .. math::
 
-   913.6\,\mathrm{\AA} \le \bar{\lambda} \le 1076.1\,\mathrm{\AA}
+   913.6\,\mathrm{Å} \le \bar{\lambda} \le 1076.1\,\mathrm{Å}
 
 Summary
 -------

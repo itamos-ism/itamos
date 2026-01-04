@@ -17,12 +17,12 @@ accounting for:
 These functions follow well-established prescriptions from the literature,
 primarily:
 
-* Federman, Glassgold & Kwan (1979)
-* van Dishoeck & Black (1988)
-* Lee et al. (1996)
-* Kamp & Bertoldi (2000)
-* Savage & Mathis (1979)
-* Wagenblast & Hartquist (1989)
+* `Federman, Glassgold & Kwan (1979) <https://ui.adsabs.harvard.edu/abs/1979ApJ...227..466F/abstract>`_
+* `van Dishoeck & Black (1988) <https://ui.adsabs.harvard.edu/abs/1988ApJ...334..771V/abstract>`_
+* `Lee et al. (1996) <https://ui.adsabs.harvard.edu/abs/1996A%26A...311..690L/abstract>`_
+* `Kamp & Bertoldi (2000) <https://ui.adsabs.harvard.edu/abs/2000A%26A...353..276K/abstract>`_
+* `Savage & Mathis (1979) <https://ui.adsabs.harvard.edu/abs/1979ARA%26A..17...73S/abstract>`_
+* `Wagenblast & Hartquist (1989) <https://ui.adsabs.harvard.edu/abs/1989MNRAS.237.1019W/abstract>`_
 
 All rates scale linearly with the incident FUV field :math:`G_0`
 (in Draine units).
@@ -60,7 +60,7 @@ and **dust attenuation**.
 Self-Shielding
 ^^^^^^^^^^^^^^
 
-Self-shielding is computed using the Federman et al. (1979) formalism via
+Self-shielding is computed using the `Federman et al. (1979) <https://ui.adsabs.harvard.edu/abs/1979ApJ...227..466F/abstract>`_ formalism via
 ``H2SHIELD1``.
 
 The Doppler linewidth is determined by turbulent broadening:
@@ -88,14 +88,14 @@ and **dust extinction**:
    \times f_{\mathrm{dust}}(A_V, \bar{\lambda})
 
 The mean wavelength :math:`\bar{\lambda}` of the dissociating bands is computed
-using ``LBAR`` following van Dishoeck & Black (1988).
+using ``LBAR`` following `van Dishoeck & Black (1988) <https://ui.adsabs.harvard.edu/abs/1988ApJ...334..771V/abstract>`_.
 
 CI Photoionization Rate
 -----------------------
 
 ``CIPDRATE(K0, G0, AV, KAV, NCI, NH2, TGAS)``
 
-The CI photoionization rate follows Kamp & Bertoldi (2000), Equation (8):
+The CI photoionization rate follows `Kamp & Bertoldi (2000) <https://ui.adsabs.harvard.edu/abs/2000A%26A...353..276K/abstract>`_, Equation (8):
 
 .. math::
 
@@ -136,7 +136,7 @@ H₂ Self-Shielding (Analytic)
 
 ``H2SHIELD1(NH2, DOPW, RADW)``
 
-Implements the Federman, Glassgold & Kwan (1979) shielding function:
+Implements the `Federman, Glassgold & Kwan (1979) <https://ui.adsabs.harvard.edu/abs/1979ApJ...227..466F/abstract>`_ shielding function:
 
 .. math::
 
@@ -165,7 +165,7 @@ H₂ Shielding (Tabulated)
 ``H2SHIELD2(NH2)``
 
 Alternative H₂ shielding based on tabulated values from
-Lee et al. (1996), Table 10.
+`Lee et al. (1996) <https://ui.adsabs.harvard.edu/abs/1996A%26A...311..690L/abstract>`_, Table 10.
 
 * Shielding factors are interpolated using cubic splines.
 * Includes shielding by both H₂ and atomic H.
@@ -178,7 +178,7 @@ CO Shielding
 
 Computes combined **CO self-shielding** and **H₂ shielding** using
 two-dimensional spline interpolation over the tables of
-van Dishoeck & Black (1988), Table 5.
+`van Dishoeck & Black (1988) <https://ui.adsabs.harvard.edu/abs/1988ApJ...334..771V/abstract>`_, Table 5.
 
 Interpolation is performed in:
 
@@ -192,7 +192,7 @@ Dust Scattering Attenuation
 ``SCATTER(AV, LAMBDA)``
 
 Computes attenuation due to **dust scattering and absorption**, following
-Wagenblast & Hartquist (1989) and Flannery et al. (1980).
+`Wagenblast & Hartquist (1989) <https://ui.adsabs.harvard.edu/abs/1989MNRAS.237.1019W/abstract>`_ and `Flannery et al. (1980) <https://ui.adsabs.harvard.edu/abs/1980ApJ...236..598F/abstract>`_.
 
 The optical depth at wavelength :math:`\lambda` is:
 
@@ -232,7 +232,7 @@ Computes the ratio:
    \frac{\tau(\lambda)}{\tau(V)}
 
 using spline interpolation over the extinction curve of
-Savage & Mathis (1979).
+`Savage & Mathis (1979) <https://ui.adsabs.harvard.edu/abs/1979ARA%26A..17...73S/abstract>`_.
 
 Mean CO Band Wavelength
 -----------------------

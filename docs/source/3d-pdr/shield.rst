@@ -69,7 +69,7 @@ The Doppler linewidth is determined by turbulent broadening:
 
    \Delta \nu_D = \frac{v_{\mathrm{turb}}}{\lambda}
 
-where a representative wavelength of :math:`\lambda = 1000\,Å` is
+where a representative wavelength of :math:`\lambda = 1000\,\mathrm{Å}` is
 assumed.
 
 CO Photodissociation Rate

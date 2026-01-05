@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to the documentation of the ITAMOS project!
-===================================================
+The ITAMOS project
+==================
 
 The **ITAMOS** project (\ **I**\ ntelligent \ **T**\ echniques for **A**\ tomic and **MO**\ lecular **S**\ tudies of the interstellar medium) focuses on developing state-of-the-art numerical codes 
 to simulate the distribution of abundances and line emissions of photodissociation regions (PDRs) in both galactic and extragalactic contexts.

@@ -6,7 +6,7 @@ Overview
 
 This routine computes molecular line cooling and the mean radiation field
 using the **Large Velocity Gradient (LVG) escape probability approximation**
-along multiple rays. It is designed for use within the 3D-PDR framework and
+along multiple rays (see description :ref:`here <sec-ep>`. It is designed for use within the 3D-PDR framework and
 operates on a given grid cell, using level populations obtained from the
 statistical equilibrium solver.
 

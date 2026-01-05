@@ -82,11 +82,3 @@ The ITAMOS project includes the following publicly available codes:
    rt-synth/run
    rt-synth/vel2fits
    rt-synth/gallery
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

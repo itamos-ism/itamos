@@ -107,3 +107,17 @@ calculations. These approximations form the basis of many
 non-LTE excitation and cooling models used in studies of the
 interstellar medium.
 
+For example, commonly used expressions include
+
+.. math::
+
+   \beta(\tau) = \frac{1 - e^{-\tau}}{\tau},
+
+for a uniform slab, and
+
+.. math::
+
+   \beta(\tau) = \frac{1}{1 + \tau},
+
+as a commonly used approximation for spherical or isotropic media.
+

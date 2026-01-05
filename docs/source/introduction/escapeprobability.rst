@@ -100,6 +100,15 @@ emission, :math:`u` is the local velocity dispersion (including
 thermal and non-thermal contributions), and the integral is performed
 along the photon path.
 
+Analytical Expression
+---------------------
+
+The analytical expression of the escape probability (`de Jong et al. 1975 <https://ui.adsabs.harvard.edu/abs/1975ApJ...199...69D/abstract>`_) is given by
+
+.. math::
+
+   \beta_{ij} = \int_{0}^{4\pi} \frac{d\Omega}{4\pi} \left[\frac{1-e^{-\tau_{ij}}}{\tau_{ij}}\right]
+
 For simple geometries, analytic expressions are often used to relate
 the escape probability to the optical depth, capturing the essential
 physics of photon trapping while avoiding explicit radiative transfer

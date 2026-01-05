@@ -2,8 +2,7 @@ Examples
 ========
 
 .. note::
-
-    There is a python wrapper that you may consider in case you prefer to run 1D models from a python interface. Please refer to the `HandsOn_1Dexamples.ipynb` jupyter notebook available on the `3D-PDR Github link <https://github.com/itamos-ism/3D-PDR>`_
+   There is a python wrapper that you may consider in case you prefer to run 1D models from a python interface. Please refer to the `HandsOn_1Dexamples.ipynb` jupyter notebook available on the `3D-PDR Github link <https://github.com/itamos-ism/3D-PDR>`_
 
 One-dimensional Example Run
 ---------------------------

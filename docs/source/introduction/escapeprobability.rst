@@ -111,13 +111,13 @@ For example, commonly used expressions include
 
 .. math::
 
-   \beta(\tau) = \frac{1 - e^{-\tau}}{\tau},
+   \beta_{ij}(\tau_{ij}) = \frac{1 - e^{-\tau_{ij}}}{\tau_{ij}},
 
 for a uniform slab, and
 
 .. math::
 
-   \beta(\tau) = \frac{1}{1 + \tau},
+   \beta_{ij}(\tau_{ij}) = \frac{1}{1 + \tau_{ij}},
 
 as a commonly used approximation for spherical or isotropic media.
 

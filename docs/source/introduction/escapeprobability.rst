@@ -112,18 +112,10 @@ The analytical expression of the escape probability (`de Jong et al. 1975 <https
    \beta_{ij} = \int_{0}^{4\pi} \frac{d\Omega}{4\pi} \left[\frac{1-e^{-\tau_{ij}}}{\tau_{ij}}\right]
 
 For simple geometries, the above expression is further simplified forming the basis of many
-non-LTE excitation and cooling models used in studies of the ISM. For example, commonly used expressions include
+non-LTE excitation and cooling models used in studies of the ISM. For example, the expression 
 
 .. math::
 
    \beta_{ij}(\tau_{ij}) = \frac{1 - e^{-\tau_{ij}}}{\tau_{ij}},
 
-for a uniform slab, and
-
-.. math::
-
-   \beta_{ij}(\tau_{ij}) = \frac{1}{1 + \tau_{ij}},
-
-as a commonly used approximation for spherical or isotropic media.
-
-To solve the general expression in three-dimensions, a ray-tracing algorithm must be developed. 
+is frequently used for one-dimensional approximations. To solve the general expression in three-dimensions, a ray-tracing algorithm must be developed. 

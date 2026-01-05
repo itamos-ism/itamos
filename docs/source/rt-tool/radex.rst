@@ -10,11 +10,11 @@ Comparison with RADEX
 **3D-PDR Setup for Comparison:**
 
 1. Edit ``config.mk``: set ``GUESS_TEMP=0`` and ``THERMALBALANCE=0`` for 1D runs
-2. Modify ``params.dat``:
+2. Modify ``params.dat`` as appropriate. For instance:
 
    ::
 
-      2)  1Dn43.dat                  !ICs file
+      2)  1Dn43.dat                  !ICs file -- assuming you have already created it
       ...
       4)  radexcomp                  !Output prefix
       5)  0                          !G0 (no FUV)
@@ -24,7 +24,7 @@ Comparison with RADEX
       ...
       23) 30.0                       !Gas temperature
       ...
-      33) hco+.dat                   !HCO+ coolant
+      33) hco+.dat                   !HCO+ coolant -- e.g. if you want to include additional coolants
 
 3. Run ``./3DPDR``
 

@@ -2,7 +2,7 @@ Escape Probability
 ==================
 
 Radiative cooling and line emission play a central role in determining the
-thermal and chemical structure of the interstellar medium (ISM). In many
+thermal and chemical structure of the ISM. In many
 astrophysical environments, however, spectral lines become optically thick,
 and emitted photons may undergo multiple absorption and re-emission events
 before escaping the medium. Accurately treating this radiative transfer

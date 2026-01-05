@@ -50,7 +50,7 @@ Comparison with RADEX
 
 **Example**
 
-The plot below shows a comparison between 3D-PDR & RT-tool (black lines) against RADEX (red lines). 
+The plot below shows a comparison between 3D-PDR & RT-tool (black lines) against RADEX (red lines). The comparison is done for three different uniform density models with :math:`10^2`, :math:`10^3`, and :math:`10^4` total H-nucleus number densities at a fixed gas temperature of :math:`T_{\rm gas}=10\,{\rm K}`.
 
 .. figure:: ../images/radexcomparison.png
    :width: 98%

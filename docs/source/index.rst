@@ -33,7 +33,6 @@ The ITAMOS project includes the following publicly available codes:
    :maxdepth: 1
    :caption: INTRODUCTION:
 
-   introduction/itamos
    introduction/pdrs
    introduction/rt
 

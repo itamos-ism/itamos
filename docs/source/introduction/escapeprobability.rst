@@ -116,6 +116,6 @@ non-LTE excitation and cooling models used in studies of the ISM. For example, t
 
 .. math::
 
-   \beta_{ij}(\tau_{ij}) = \frac{1 - e^{-\tau_{ij}}}{\tau_{ij}},
+   \beta_{ij}(\tau_{ij}) = \frac{1 - e^{-\tau_{ij}}}{\tau_{ij}}
 
 is frequently used for one-dimensional approximations. To solve the general expression in three-dimensions, a ray-tracing algorithm must be developed. 

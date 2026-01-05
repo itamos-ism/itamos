@@ -47,3 +47,11 @@ Comparison with RADEX
 .. note::
    
    Differences are expected since **3D-PDR** treats the cloud as 1D with depth-dependent level populations, while RADEX uses a 0D approach.
+
+**Example**
+
+The plot below shows a comparison between 3D-PDR & RT-tool (black lines) against RADEX (red lines). 
+
+.. figure:: ../images/radexcomparison.png
+   :width: 98%
+   :alt: 3D-PDR+RT-tool versus RADEX

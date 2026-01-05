@@ -47,7 +47,7 @@ the surrounding medium.
 Escape Probability Approximation
 --------------------------------
 
-In the escape probability (or large velocity gradient, LVG)
+In the escape probability (or large velocity gradient, LVG; `Sobolev 1960 <https://ui.adsabs.harvard.edu/abs/1960mes..book.....S/abstract>`_; `Castor 1970 <https://ui.adsabs.harvard.edu/abs/1970MNRAS.149..111C/abstract>`_; `de Jong et al. 1975 <https://ui.adsabs.harvard.edu/abs/1975ApJ...199...69D/abstract>`_; `Poelman & Spaans 2005 <https://ui.adsabs.harvard.edu/abs/2005A%26A...440..559P/abstract>`_)
 approximation, the mean radiation field is expressed as a weighted
 sum of locally produced line radiation and an external background
 field,

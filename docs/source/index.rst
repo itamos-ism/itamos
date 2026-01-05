@@ -36,6 +36,7 @@ The ITAMOS project includes the following publicly available codes:
    :caption: INTRODUCTION:
 
    introduction/pdrs
+   introduction/escapeprobability
    introduction/rt
 
 .. toctree::

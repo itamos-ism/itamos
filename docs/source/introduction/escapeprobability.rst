@@ -109,14 +109,8 @@ The analytical expression of the escape probability (`de Jong et al. 1975 <https
 
    \beta_{ij} = \int_{0}^{4\pi} \frac{d\Omega}{4\pi} \left[\frac{1-e^{-\tau_{ij}}}{\tau_{ij}}\right]
 
-For simple geometries, analytic expressions are often used to relate
-the escape probability to the optical depth, capturing the essential
-physics of photon trapping while avoiding explicit radiative transfer
-calculations. These approximations form the basis of many
-non-LTE excitation and cooling models used in studies of the
-interstellar medium.
-
-For example, commonly used expressions include
+For simple geometries, the above expression is further simplified forming the basis of many
+non-LTE excitation and cooling models used in studies of the ISM. For example, commonly used expressions include
 
 .. math::
 
@@ -130,3 +124,4 @@ for a uniform slab, and
 
 as a commonly used approximation for spherical or isotropic media.
 
+To solve the general expression in three-dimensions, a ray-tracing algorithm must be developed. 

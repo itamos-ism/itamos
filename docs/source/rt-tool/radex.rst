@@ -50,7 +50,7 @@ Comparison with RADEX
 
 **Example**
 
-The plot below shows a comparison between 3D-PDR & RT-tool (black lines) against RADEX (red lines). The comparison is done for three different uniform density models with :math:`10^2`, :math:`10^3`, and :math:`10^4` total H-nucleus number densities at a fixed gas temperature of :math:`T_{\rm gas}=10\,{\rm K}`.
+The plot below shows a comparison between 3D-PDR & RT-tool (black lines) against RADEX (red lines). The comparison is done for three different uniform density models with :math:`10^2`, :math:`10^3`, and :math:`10^4` total H-nucleus number densities at a fixed gas temperature of :math:`T_{\rm gas}=10\,{\rm K}`. The radiation temperatures (Tr in K) of C+, [CI] (1-0), CO (1-0), [OI] 63μm, HCO+ (1-0) and HNC (1-0) versus the column density (N) of the corresponding coolant are shown. In general there is a broad agreement between the two codes. As noted above, the differences seen in e.g. HCO+ and HNC for low densities are potentially associated with differences in the treatment of level populations.
 
 .. figure:: ../images/radexcomparison.png
    :width: 98%

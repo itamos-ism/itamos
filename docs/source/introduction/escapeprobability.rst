@@ -1,5 +1,5 @@
-Escape Probability Formalism
-============================
+Escape Probability
+==================
 
 Radiative line emission is a key mechanism regulating the thermal
 balance of astrophysical gas. In many interstellar environments,
@@ -8,9 +8,17 @@ in atomic or molecular transitions may undergo multiple absorption
 and re-emission events before escaping the medium. A full treatment
 of this problem requires solving the radiative transfer equation,
 which is computationally demanding, particularly in multi-level
-and multi-dimensional systems. The escape probability formalism
+and multi-dimensional systems. This formalism
 provides a physically motivated approximation that captures the
 essential effects of radiative trapping while remaining tractable.
+
+The escape probability, usually denoted by :math:`\beta`, represents the
+probability that a photon emitted in a given transition can leave the system
+without being reabsorbed. In optically thin conditions (:math:`\tau \ll 1`),
+photons escape freely and :math:`\beta \rightarrow 1`. In optically thick
+media (:math:`\tau \gg 1`), photons are trapped and :math:`\beta \ll 1`,
+reducing the effective cooling rate.
+
 
 Statistical Equilibrium and Radiation Field
 -------------------------------------------

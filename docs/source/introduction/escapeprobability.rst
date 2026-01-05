@@ -14,9 +14,9 @@ essential effects of radiative trapping while remaining tractable.
 
 The escape probability, usually denoted by :math:`\beta`, represents the
 probability that a photon emitted in a given transition can leave the system
-without being reabsorbed. In optically thin conditions (:math:`\tau \ll 1`),
+without being reabsorbed. In optically thin conditions (i.e. where :math:`\tau \ll 1`),
 photons escape freely and :math:`\beta \rightarrow 1`. In optically thick
-media (:math:`\tau \gg 1`), photons are trapped and :math:`\beta \ll 1`,
+media (i.e. where :math:`\tau \gg 1`), photons are trapped and :math:`\beta \ll 1`,
 reducing the effective cooling rate.
 
 

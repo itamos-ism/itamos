@@ -1,10 +1,10 @@
 Gallery
 =======
 
-Velocity integrated emission maps of a star-forming region using **RT-synth**. The snapshot is taken from the SILCC-Zoom project (`Seifried et al., 2017 <https://ui.adsabs.harvard.edu/abs/2017MNRAS.472.4797S/abstract>`_) and it is modelled at a resolution of :math:`512^{3}` using the MPI version of 3D-PDR. This is the highest resolution 3D model of PDRs in the field.
+Velocity integrated emission maps of a star-forming region using **RT-synth**. The snapshot is the central sub-region taken from the SILCC-Zoom project (`Seifried et al., 2017 <https://ui.adsabs.harvard.edu/abs/2017MNRAS.472.4797S/abstract>`_) and it is modelled at a resolution of :math:`256^{3}` using the OpenMP version of 3D-PDR.
 
-Top left shows the emission of CO(1-0) and the inset shows a detail of the central region. Top right shows the [CI] (1-0) line. Bottom left shows the [CII] line at 158μm and bottom right the [OI] line at 63μm.
+The top row shows the emission of [CII] 158μm, the [CI] (1-0) and the CO (1-0) lines, respectively. The colour bar in the top row is in linear scale. The bottom row shows the emission of [OI] 63μm, HCO+ (1-0) and HCN (1-0), respectively, with the colour bar in logarithmic scale.
 
-.. figure:: ../images/coolant_emission.png
+.. figure:: ../images/six_line_maps_2x3.png
    :width: 98%
    :alt: Velocity integrated maps of a star-forming region

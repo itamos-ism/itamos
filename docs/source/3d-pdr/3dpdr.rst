@@ -5,7 +5,7 @@ The 3D-PDR code
 
 3D-PDR (`Bisbas et al. 2012 <https://ui.adsabs.harvard.edu/abs/2012MNRAS.427.2100B/abstract>`_) is a state-of-the-art numerical code designed to model photodissociation regions (PDRs) in arbitrary three-dimensional geometries. It self-consistently solves the chemistry, thermal balance, and radiative transfer within the interstellar medium, accounting for the interaction between far-ultraviolet (FUV) radiation and gas and dust. The code employs a ray-tracing scheme based on the HEALPix algorithm to evaluate the attenuation of the radiation field in all directions from each grid cell, allowing realistic treatment of complex density structures. It includes a comprehensive chemical network, heating and cooling processes, and line radiative transfer for key atomic and molecular species. 
 
-The upgraded 3D-PDR uses the ray-tracing scheme RAYTHEIA (`Zhu et al., 2026 <https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag906Z/abstract>`), a highly parallelized algorithm that achieves significant speed-up allowing to model high-resolution PDRs in full three-dimensions. In particular, the MPI-parallelized version enables large-scale simulations on distributed-memory systems, making 3D-PDR a powerful tool for investigating PDRs in both Galactic and extragalactic environments.
+The upgraded 3D-PDR uses the ray-tracing scheme RAYTHEIA (`Zhu et al., 2026 <https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag906Z/abstract>`_), a highly parallelized algorithm that achieves significant speed-up allowing to model high-resolution PDRs in full three-dimensions. In particular, the MPI-parallelized version enables large-scale simulations on distributed-memory systems, making 3D-PDR a powerful tool for investigating PDRs in both Galactic and extragalactic environments.
 
 You can download the 3D-PDR code from this `Github link <https://github.com/itamos-ism/3D-PDR>`_.
 
@@ -14,8 +14,9 @@ Papers using 3D-PDR
 
 Since its development, 3D-PDR and its coupled tools for synthetic observations have been used to demonstrate the power of full three-dimensional PDR modelling for both interpreting observations and for probing fundamental ISM physics. Below is a growing list of papers that used 3D-PDR in their analysis (in reversed chronological order):
 
-
-* `The SOMA Atomic Outflow Survey. I. An Atomic OI and Highly Ionized OIII Outflow from Massive Protostar G11.94-00.62` (`Oakey et al., 2025 <https://ui.adsabs.harvard.edu/abs/2025arXiv250920551O/abstract>`_)
+* `The impact of attenuation on cosmic-ray chemistry: I. Abundances and chemical calibrators in molecular clouds` (`Roy et al., 2026 <https://ui.adsabs.harvard.edu/abs/2026A%26A...708A..16R/abstract>`_)
+* `The SOMA Atomic Outflow Survey. I. An Atomic OI and Highly Ionized OIII Outflow from Massive Protostar G11.94-00.62` (`Oakey et al., 2026 <https://ui.adsabs.harvard.edu/abs/2026ApJ..1003...26O/abstract>`_)
+* `Large scale [CI] and the [CI]-to-CO transition in rho-Ophiuchus molecular cloud` (`Xia et al., 2026 <https://ui.adsabs.harvard.edu/abs/2026SCPMA..6969513X/abstract>`_)
 * `NeuralPDR: neural differential equations as surrogate models for photodissociation regions` (`Vermarien et al., 2025 <https://ui.adsabs.harvard.edu/abs/2025MLS%26T...6b5069V/abstract>`_)
 * `Metallicity dependence of the CO-to-H2 and the [CI]-to-H2 conversion factors in galaxies` (`Bisbas et al., 2025 <https://ui.adsabs.harvard.edu/abs/2025A%26A...697A.115B/abstract>`_)
 * `3D-PDR Orion dataset and NeuralPDR: Neural Differential Equations for Photodissociation Regions` (`Vermarien et al., 2024 <https://ui.adsabs.harvard.edu/abs/2024arXiv241200758V/abstract>`_)

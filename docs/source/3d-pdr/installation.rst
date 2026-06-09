@@ -106,12 +106,12 @@ For further details on SUNDIALS, see the `SUNDIALS GitHub repository <https://gi
 Installing 3D-PDR
 -----------------
 
-Within the directory ``~/3D-PDR/``, extract the 3D-PDR package:
+Within the directory ``~/3D-PDR/``, extract the 3D-PDR package (if you have downloaded the zip file):
 
 .. code-block:: console
 
     $ cd ~/3D-PDR/
-    $ tar xvzf 3DPDR.tgz
+    $ unzip 3D-PDR-main.zip
 
 Navigate to the source directory:
 
@@ -120,10 +120,16 @@ Navigate to the source directory:
     $ cd 3D-PDR-main/src
 
 
+Before compiling
+----------------
+
+Before compiling, you will need to copy the ``config.mk`` and ``makefile`` from the ``~/3D-PDR-main/templates/1D/`` to the ``~/3D-PDR-main/src/`` directory. Then, open the file ``config.mk`` and ensure that the ``F90`` (Fortran) and ``CC`` (C++) compiler paths are correctly set.
+
+You will also need to copy ``params.dat`` from ``~/3D-PDR-main/templates/1D`` to the ``~/3D-PDR-main/`` directory.
+
+
 Compiling the Code and Running a Test Model
 -------------------------------------------
-
-Before compiling, open the file ``config.mk`` and ensure that the ``F90`` (Fortran) and ``CC`` (C++) compiler paths are correctly set.
 
 .. note::
 

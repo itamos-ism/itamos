@@ -166,7 +166,7 @@ For example, using **gnuplot**:
 
     set log
     plot 'sims/test.pdr.fin' u 3:4 w l t 'my model', \
-         'benchmark/model.pdr.fin' u 3:4 w l t 'benchmark'
+         'benchmarks/model.pdr.fin' u 3:4 w l t 'benchmark'
 
 If the curves match, your installation is complete and functioning correctly.
 

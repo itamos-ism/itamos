@@ -51,5 +51,5 @@ Since its development, 3D-PDR and its coupled tools for synthetic observations h
 * `Effective Destruction of CO by Cosmic Rays: Implications for Tracing H2 Gas in the Universe` (`Bisbas et al. 2015 <https://ui.adsabs.harvard.edu/abs/2015ApJ...803...37B/abstract>`_)
 * `Astrochemical Correlations in Molecular Clouds` (`Gaches et al. 2015 <https://ui.adsabs.harvard.edu/abs/2015ApJ...799..235G/abstract>`_)
 * `A photodissociation region study of NGC 4038` (`Bisbas et al. 2014 <https://ui.adsabs.harvard.edu/abs/2014MNRAS.443..111B/abstract>`_)
-* `An alternative accurate tracer of molecular clouds: the 'XCi-factor'` (`Offner et al. 2014 <https://ui.adsabs.harvard.edu/abs/2014MNRAS.440L..81O/abstract>`_)
-* `Modeling the Atomic-to-molecular Transition and Chemical Distributions of Turbulent Star-forming Clouds` (`Offner et al. 2013 <https://ui.adsabs.harvard.edu/abs/2013ApJ...770...49O/abstract>`_)
+2. `An alternative accurate tracer of molecular clouds: the 'XCi-factor'` (`Offner et al. 2014 <https://ui.adsabs.harvard.edu/abs/2014MNRAS.440L..81O/abstract>`_)
+1. `Modeling the Atomic-to-molecular Transition and Chemical Distributions of Turbulent Star-forming Clouds` (`Offner et al. 2013 <https://ui.adsabs.harvard.edu/abs/2013ApJ...770...49O/abstract>`_)

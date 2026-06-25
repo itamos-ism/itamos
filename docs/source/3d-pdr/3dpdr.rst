@@ -14,6 +14,7 @@ Papers using 3D-PDR
 
 Since its development, 3D-PDR and its coupled tools for synthetic observations have been used to demonstrate the power of full three-dimensional PDR modelling for both interpreting observations and for probing fundamental ISM physics. Below is a growing list of papers that used 3D-PDR in their analysis (in reversed chronological order):
 
+* `A HINSA view of cosmic-ray ionization in IC 348 and NGC 1333: evidence for a strong low-energy cosmic-ray disparity` (`Luo et al., 2026 <https://ui.adsabs.harvard.edu/abs/2026arXiv260616796L/abstract>`_)
 * `The impact of attenuation on cosmic-ray chemistry: I. Abundances and chemical calibrators in molecular clouds` (`Roy et al., 2026 <https://ui.adsabs.harvard.edu/abs/2026A%26A...708A..16R/abstract>`_)
 * `The SOMA Atomic Outflow Survey. I. An Atomic OI and Highly Ionized OIII Outflow from Massive Protostar G11.94-00.62` (`Oakey et al., 2026 <https://ui.adsabs.harvard.edu/abs/2026ApJ..1003...26O/abstract>`_)
 * `Large scale [CI] and the [CI]-to-CO transition in rho-Ophiuchus molecular cloud` (`Xia et al., 2026 <https://ui.adsabs.harvard.edu/abs/2026SCPMA..6969513X/abstract>`_)

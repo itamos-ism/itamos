@@ -46,6 +46,7 @@ The ITAMOS project includes the following publicly available codes:
    3d-pdr/3dpdr
    3d-pdr/gallery
    3d-pdr/installation
+   3d-pdr/pdrstudio
    3d-pdr/makefile
    3d-pdr/params
    3d-pdr/species
@@ -61,6 +62,7 @@ The ITAMOS project includes the following publicly available codes:
    3d-pdr/changeTgas
    3d-pdr/shield
    3d-pdr/levelpop
+   3d-pdr/ramestimate
 
 .. toctree::
    :maxdepth: 1

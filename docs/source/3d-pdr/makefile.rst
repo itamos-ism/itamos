@@ -193,6 +193,7 @@ Third Section (Convergence and Numerical Robustness Options)
     RESTART           = 0
     OUTRAYINFO        = 0
     CHEMANALYSIS      = 0
+    LEVMAX            = 0
 
 These flags control the numerics of the chemical and thermal-balance solvers. They were added to address convergence and stability issues found in stiff chemistry, optically thick lines, and stretched grids; all are recommended unless otherwise noted, and are set to ``1`` by default.
 
@@ -281,3 +282,50 @@ These flags control the numerics of the chemical and thermal-balance solvers. Th
 
   - ``1`` — switch on. Not recommended for 3D models!
   - ``0`` — switch off (default).
+
+- **LEVMAX**:
+  Enables the runtime ``-lmax=N`` command-line flag, which caps the number of energy levels loaded per coolant.
+
+  - ``1`` — switch on. See :ref:`levmax-flag` below for full details and usage.
+  - ``0`` — switch off (default); ``-lmax`` is an unrecognised option and all levels from each coolant's LAMDA file are used.
+
+
+.. _levmax-flag:
+
+The LEVMAX flag
+----------------
+
+``LEVMAX`` is a compile-time switch that enables an optional *runtime* command-line flag, ``-lmax=N``, which caps the number of rotational/energy levels loaded from each coolant's LAMDA file at ``N``.
+
+Why this matters for RAM
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The level-population arrays for each coolant (the ``line(N,N)`` emissivity matrix plus the population, solution, relative-change, and Ng-history vectors) scale as :math:`N^2` per grid cell, where :math:`N` is the number of energy levels. For coolants with many levels — e.g. ``12co.dat`` has 41 levels — this quadratic scaling dominates the total memory footprint of a large 3D model. Capping the number of *used* levels at a smaller ``N`` (while still reading the full collision-rate tables needed for accurate excitation at the levels that matter) can cut coolant RAM by a factor of 3–6, typically with less than 0.1% change in the resulting gas temperature.
+
+Coolants that already have few levels (e.g. ``c+.dat``, ``12c.dat``, ``16o.dat``, all ≤5 levels) are unaffected by any ``N ≥ 5``.
+
+Usage
+~~~~~
+
+First, ensure ``LEVMAX = 1`` in ``config.mk`` and recompile. Then pass the cap as a command-line argument when running the code:
+
+.. code-block:: console
+
+   $ ./3DPDR -lmax=15
+
+This loads at most 15 levels per coolant. Omitting the flag (or compiling with ``LEVMAX = 0``) uses all levels from each LAMDA file — the original, backward-compatible behaviour.
+
+.. note::
+
+   The active ``LEVMAX`` value is also recorded in the ``.RTspop.fin`` output (as ``LMAX=N``) so that downstream tools, such as :doc:`../rt-tool/RT-tool`, know how many levels were used when the model was run. See :doc:`outputs` for details.
+
+Estimating the RAM savings beforehand
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Before committing to a large 3D run, use :doc:`ramestimate` with the ``--lmax`` option to compare the estimated RAM with and without a cap, e.g.:
+
+.. code-block:: console
+
+   $ python3 ram_estimate.py --res 256 --raytheia 1 --lmax 13
+
+This reports the per-coolant level counts actually used after the cap, alongside the resulting RAM breakdown, so you can choose an ``N`` that fits your available memory before running the model.

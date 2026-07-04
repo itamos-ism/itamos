@@ -172,5 +172,7 @@ If the curves match, your installation is complete and functioning correctly.
 
 ---
 
-Congratulations!  
+Congratulations!
 You are now ready to begin running your own 3D-PDR simulations.
+
+If you would rather configure, run, and analyse your models from a browser instead of the terminal, see :doc:`pdrstudio`.

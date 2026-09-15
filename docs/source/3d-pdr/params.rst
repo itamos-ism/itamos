@@ -164,6 +164,28 @@ Example:
     33) hco+.dat                   !HCO⁺
     34) cs.dat                     !CS
 
+Isotopologue Coolants
+~~~~~~~~~~~~~~~~~~~~~
+
+A coolant line in ``params.dat`` normally contains just a filename. It may optionally carry a second, whitespace-separated column giving an **isotope ratio**, used to add an isotopologue (e.g. :math:`\rm ^{13}CO`) as an additional coolant without requiring it to be a separate species in the chemical network.
+
+Example:
+::
+
+    29) 12co.dat                   !CO Do not change the following order
+    30) 12c+.dat                   !CII
+    31) 12c.dat                    !CI
+    32) 16o.dat                    !OI
+    33) 13co.dat 60                !13CO, isotope ratio 12CO/13CO = 60
+
+Here, entry 33 adds ``13co.dat`` (available in ``chemfiles/``) as a coolant. The abundance used for its level-population solve is the :math:`\rm ^{12}CO` abundance divided by the given ratio (60), i.e. :math:`\rm ^{12}CO/^{13}CO = 60`, fixed throughout the simulation.
+
+* If the ratio column is omitted, it defaults to ``1.0`` (no scaling) -- existing ``params.dat`` files without a ratio column continue to work unchanged.
+* The ratio is fixed for the whole simulation; it is not computed self-consistently from the chemistry.
+
+.. note::
+   The LAMDA data file for an isotopologue within the 3D-PDR framework (e.g. ``13co.dat`` in the ``chemfiles/`` directory) typically has the same molecule name in its header as the parent species (e.g. ``CO``), since collisional and radiative data are shared. Because of this, 3D-PDR automatically detects when two coolants share the same name and disambiguates their output files by appending the coolant's data filename, e.g. ``test.CO_13co.line.fin`` / ``test.CO_13co.spop.fin``, instead of overwriting the parent species' ``test.CO.line.fin`` / ``test.CO.spop.fin``. Coolants with non-colliding names keep their plain ``test.<name>.line.fin`` / ``test.<name>.spop.fin`` naming.
+
 Custom Coolant Data Files
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 

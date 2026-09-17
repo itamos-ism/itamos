@@ -50,6 +50,7 @@ PDR Parameters
     14) 0                          !Redshift (for CMB temperature)
     15) 0.7                        !Av critical (SUPRATHERMAL switch)
     16) 3.3                        !Alfven velocity (km/s) (SUPRATHERMAl switch)
+    17) 1.0                        !Minimum PDR density considered
 
 * **Entry 5**: FUV radiation field intensity normalized to `Draine (1978) <https://ui.adsabs.harvard.edu/abs/1978ApJS...36..595D/abstract>`_ spectral shape.
   
@@ -67,6 +68,7 @@ PDR Parameters
 * **Entry 14**: Redshift value determining CMB temperature.
 * **Entry 15**: Critical Av for ``SUPRATHERMAL = 1`` switch (Av threshold where suprathermal CO formation via CH⁺ becomes negligible).
 * **Entry 16**: Alfvén velocity (km/s) for ``SUPRATHERMAL = 1`` switch.
+* **Entry 17**: Minumim PDR considered below which 3D-PDR does not perform thermal balance iterations.
 
 .. note::
    Entries 15 and 16 are only used when compiled with ``SUPRATHERMAL = 1``.
@@ -97,18 +99,18 @@ Ray-tracing, ODE Solver, and Chemistry Iterations
         ===========================|
         Ray-tracing parameters     |
         ===========================|
-    17) 0                          !HEALPix level of refinement
-    18) 1.3                        !Theta critical (0<phi<pi/2)
+    18) 0                          !HEALPix level of refinement
+    19) 1.3                        !Theta critical (0<phi<pi/2)
         ===========================|
         ODE Solver parameters      |
         ===========================|
-    19) 1.0D-8                     !relative abundance tolerance
-    20) 1.0D-30                    !absolute abundance tolerance
+    20) 1.0D-8                     !relative abundance tolerance
+    21) 1.0D-30                    !absolute abundance tolerance
         ===========================|
         Chemistry iterations       |
         ===========================|
-    21) 8                          !First set of Chemical Iterations
-    22) 6000                       !Total iterations
+    22) 8                          !First set of Chemical Iterations
+    23) 6000                       !Total iterations
 
 .. warning::
    Modify these values only if you understand their impact on numerical stability and convergence.
@@ -118,29 +120,29 @@ Thermal Balance Parameters
 
 ::
 
-    23) 40.0                       !Gas temperature for isothermal models
-    24) 10.0                       !Floor temperature (if <Tcmb it's set to Tcmb)
-    25) 30000.0                    !Maximum allowed gas temperature
-    26) 20.0                       !Dust temperature for isothermal dust models
-    27) 0.005                      !Fcrit (% Accuracy)
-    28) 0.01                       !Tdiff (maximum temperature difference)
+    24) 40.0                       !Gas temperature for isothermal models
+    25) 10.0                       !Floor temperature (if <Tcmb it's set to Tcmb)
+    26) 30000.0                    !Maximum allowed gas temperature
+    27) 20.0                       !Dust temperature for isothermal dust models
+    28) 0.005                      !Fcrit (% Accuracy)
+    29) 0.01                       !Tdiff (maximum temperature difference)
 
-* **Entry 23**: Gas temperature for isothermal models (requires ``THERMALBALANCE = 0`` and ``GUESS_TEMP = 0`` in makefile).
-* **Entry 24**: Minimum gas temperature floor. Automatically raised to CMB temperature if lower.
-* **Entry 25**: Maximum allowed gas temperature (not recommended to change).
-* **Entry 26**: Dust temperature for isothermal dust models (requires ``DUST = 0`` in makefile).
-* **Entry 27**: Thermal balance accuracy tolerance (modify with caution).
-* **Entry 28**: Maximum temperature difference for thermal balance convergence (modify with caution).
+* **Entry 24**: Gas temperature for isothermal models (requires ``THERMALBALANCE = 0`` and ``GUESS_TEMP = 0`` in makefile).
+* **Entry 25**: Minimum gas temperature floor. Automatically raised to CMB temperature if lower.
+* **Entry 26**: Maximum allowed gas temperature (not recommended to change).
+* **Entry 27**: Dust temperature for isothermal dust models (requires ``DUST = 0`` in makefile).
+* **Entry 28**: Thermal balance accuracy tolerance (modify with caution).
+* **Entry 29**: Maximum temperature difference for thermal balance convergence (modify with caution).
 
 Coolant Files
 -------------
 
 ::
 
-    29) 12co.dat                   !CO Do not change the following order
-    30) 12c+.dat                   !CII
-    31) 12c.dat                    !CI
-    32) 16o.dat                    !OI
+    30) 12co.dat                   !CO Do not change the following order
+    31) 12c+.dat                   !CII
+    32) 12c.dat                    !CI
+    33) 16o.dat                    !OI
 
 The default coolant list (12CO, C⁺, C, O) should maintain the specified order. Additional coolants can be appended after ``16o.dat``, though this may impact computational performance.
 
@@ -157,12 +159,12 @@ To add coolants beyond the defaults:
 Example:
 ::
 
-    29) 12co.dat                   !CO Do not change the following order
-    30) 12c+.dat                   !CII
-    31) 12c.dat                    !CI
-    32) 16o.dat                    !OI
-    33) hco+.dat                   !HCO⁺
-    34) cs.dat                     !CS
+    30) 12co.dat                   !CO Do not change the following order
+    31) 12c+.dat                   !CII
+    32) 12c.dat                    !CI
+    33) 16o.dat                    !OI
+    34) hco+.dat                   !HCO⁺
+    35) cs.dat                     !CS
 
 Isotopologue Coolants
 ~~~~~~~~~~~~~~~~~~~~~
@@ -172,13 +174,13 @@ A coolant line in ``params.dat`` normally contains just a filename. It may optio
 Example:
 ::
 
-    29) 12co.dat                   !CO Do not change the following order
-    30) 12c+.dat                   !CII
-    31) 12c.dat                    !CI
-    32) 16o.dat                    !OI
-    33) 13co.dat 60                !13CO, isotope ratio 12CO/13CO = 60
+    30) 12co.dat                   !CO Do not change the following order
+    31) 12c+.dat                   !CII
+    32) 12c.dat                    !CI
+    33) 16o.dat                    !OI
+    34) 13co.dat 60                !13CO, isotope ratio 12CO/13CO = 60
 
-Here, entry 33 adds ``13co.dat`` (available in ``chemfiles/``) as a coolant. The abundance used for its level-population solve is the :math:`\rm ^{12}CO` abundance divided by the given ratio (60), i.e. :math:`\rm ^{12}CO/^{13}CO = 60`, fixed throughout the simulation.
+Here, entry 34 adds ``13co.dat`` (available in ``chemfiles/``) as a coolant. The abundance used for its level-population solve is the :math:`\rm ^{12}CO` abundance divided by the given ratio (60), i.e. :math:`\rm ^{12}CO/^{13}CO = 60`, fixed throughout the simulation.
 
 * If the ratio column is omitted, it defaults to ``1.0`` (no scaling) -- existing ``params.dat`` files without a ratio column continue to work unchanged.
 * The ratio is fixed for the whole simulation; it is not computed self-consistently from the chemistry.

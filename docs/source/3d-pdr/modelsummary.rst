@@ -47,7 +47,7 @@ What it reports
    * - Row
      - Content
    * - 1
-     - FUV intensity :math:`G_0` (Draine units), cosmic-ray ionization rate :math:`\zeta` (s\ :sup:`-1`), dust-to-gas ratio (metallicity, relative to Galactic; it also scales :math:`A_V/N_{\rm H}`), microturbulent velocity (km s\ :sup:`-1`).
+     - FUV intensity :math:`G_0` (Draine units), cosmic-ray ionization rate :math:`\zeta` (s\ :sup:`-1`), dust-to-gas ratio (metallicity, relative to solar; it also scales :math:`A_V/N_{\rm H}`), microturbulent velocity (km s\ :sup:`-1`).
    * - 2
      - Resolution of the grid: ``xres yres zres``.
    * - 3
@@ -78,7 +78,7 @@ Example
    ==============================================================================
    FUV field G0     : 10  (Draine units)
    CR ionization    : attenuated CR model "L" (column-dependent zeta, CRATTENUATION=1)
-   Dust-to-gas      : 1  (x Galactic; also scales A_V/N_H)
+   Dust-to-gas      : 1  (x Solar; also scales A_V/N_H)
    v_turb           : 1 km/s
    Resolution       : 64 x 64 x 64 cells
    Box size         : 16 x 16 x 16  pc

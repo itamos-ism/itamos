@@ -63,6 +63,7 @@ The ITAMOS project includes the following publicly available codes:
    3d-pdr/shield
    3d-pdr/levelpop
    3d-pdr/ramestimate
+   3d-pdr/modelsummary
 
 .. toctree::
    :maxdepth: 1

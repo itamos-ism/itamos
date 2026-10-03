@@ -91,6 +91,10 @@ Parameters Used
 Notes
 -----
 
+- With ``MRNDUST = 1`` (see :doc:`makefile` and :doc:`rates`) the two cross sections above are multiplied by the
+  ratio of the MRN-integrated cross section per H nucleus (:math:`1.18\times10^{-21}` cm\ :sup:`2`) to the total cross section of the table
+  (:math:`6.273\times10^{-22}` cm\ :sup:`2`), i.e. by 1.89, preserving their ratio.
+
 - The function includes commented-out alternative formulations from:
 
   - Traditional rate with simple temperature dependence

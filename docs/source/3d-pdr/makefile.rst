@@ -73,6 +73,7 @@ Second Section (Chemistry and Density Options)
     THERMALBALANCE    = 1
     FORCECONVERGENCE  = 1
     GRAINRECOMB       = 0
+    MRNDUST           = 0
     SUPRATHERMAL      = 0
     H2FORM            = CT02
     CRATTENUATION     = 0
@@ -160,6 +161,24 @@ Second Section (Chemistry and Density Options)
   The options are mutually exclusive and any other value stops the build.
   ``GRAINRECOMB = 2`` needs no extra input and works with all networks
   (``REDUCED``, ``MEDIUM``, ``FULL``, ``MYNETWORK``).
+  Cations that already have an explicit grain-assisted recombination reaction in the network
+  (``X+ + e- + #``, as He\ :sup:`+` and C\ :sup:`+` in the ``REDUCED`` network) are **not** given the
+  Draine & Sutin term, to avoid counting the grain sink twice (see :doc:`rates`).
+
+- **MRNDUST**:
+  Replaces the single representative grain (``Grain radius`` in ``params.dat``) by the
+  `Mathis, Rumpl & Nordsieck (1977) <https://ui.adsabs.harvard.edu/abs/1977ApJ...217..425M/abstract>`_
+  grain size distribution, :math:`dn/da \propto a^{-3.5}` between 5 nm and 0.25 µm,
+  normalized to the dust-to-gas ratio of ``params.dat``.
+
+  - ``MRNDUST = 0`` — single-grain treatment (default). The results are bit-identical to those of
+    a code without this option.
+  - ``MRNDUST = 1`` — the size distribution is used in the ``GRAINRECOMB = 2`` recombination
+    term, in the H₂ formation rate (``H2FORM = CT02``) and in the gas–grain collisional heating.
+    It has no effect on the other grain-related processes (e.g. ``GRAINRECOMB = 1``, photoelectric heating or the dust temperature).
+    See :doc:`rates` for the description and caveats.
+
+  Any other value stops the build.
 
 - **SUPRATHERMAL**:
   Enables suprathermal formation of CO via CH⁺.

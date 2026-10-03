@@ -263,7 +263,7 @@ it gives the electron-density-independent grain-collision rate
 :math:`k_{\rm gr}\,n(\mathrm{X}^+)`.
 
 ``GRAINRECOMB = 1``
-^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~
 
 Grain-assisted recombination of H\ :sup:`+`, He\ :sup:`+`, C\ :sup:`+`,
 Mg\ :sup:`+`, S\ :sup:`+` and Fe\ :sup:`+` follows the fitting formulae of
@@ -287,7 +287,7 @@ Molecular ions are not treated.
 Some issues remain for the ``FULL`` network.
 
 ``GRAINRECOMB = 2``
-^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~
 
 This option replaces the empirical fits by a generic grain-collision rate in the
 spirit of `Draine & Sutin (1987) <https://ui.adsabs.harvard.edu/abs/1987ApJ...320..803D/abstract>`_,
@@ -298,6 +298,12 @@ Ions are identified by the trailing ``+`` characters of the species name,
 without any list of species, so it works for any network.
 Reactions that involve grain surfaces (``#`` in the reactant list) and
 :math:`\mathrm{PAH}^+` (which has its own treatment) are excluded.
+In addition, an ion that already has an explicit grain-assisted recombination
+reaction in the network (a reaction :math:`\mathrm{X}^+ + e^- + \# \rightarrow \ldots`)
+receives **no** Draine & Sutin term in any of its gas-phase channels,
+so that the grain sink of that ion is not counted twice.
+The list of affected reactions (ion mass, charge and number of channels) is
+built once, when the rate routine is first called.
 
 The model uses a single representative grain of radius :math:`a`
 (``Grain radius`` in ``params.dat``) and material density
@@ -343,11 +349,99 @@ the grain term is shared equally between them, so the total added rate equals
    - The ``REDUCED`` network contains explicit grain-surface recombination
      reactions of He\ :sup:`+` and C\ :sup:`+` (with ``#`` in the reactant
      list, following `Gong et al. (2017) <https://ui.adsabs.harvard.edu/abs/2017ApJ...843...38G/abstract>`_).
-     They are not modified by ``GRAINRECOMB = 2`` but remain active, so for these two ions
-     the grain sink is counted twice with this network (the same holds for ``GRAINRECOMB = 1``).
-     The ``MEDIUM``, ``FULL`` and ``MYNETWORK`` networks do not have such reactions.
+     For these two ions the Draine & Sutin term is **not** added and only the explicit
+     reactions act, whereas all other cations of the network receive the grain term.
+     The same double counting remains for ``GRAINRECOMB = 1``, which adds its fit
+     for He\ :sup:`+` and C\ :sup:`+` to the explicit reactions.
+     The ``MEDIUM``, ``FULL`` and ``MYNETWORK`` networks do not have such reactions
+     and are not affected by this rule.
    - The ``REDUCED``, ``MEDIUM``, ``FULL`` and ``MYNETWORK`` networks can all be
      used.
+
+``MRNDUST = 1``: MRN grain size distribution
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+By default the code represents the dust by a single grain of radius ``Grain radius``
+(``params.dat``), and some processes use hard-wired grain constants calibrated to a fixed
+grain population. With ``MRNDUST = 1`` the dust is instead described by the
+`Mathis, Rumpl & Nordsieck (1977) <https://ui.adsabs.harvard.edu/abs/1977ApJ...217..425M/abstract>`_
+(MRN) power law,
+
+.. math::
+
+   \frac{dn}{da} = A\,a^{-3.5}, \qquad 5\times10^{-7}\ {\rm cm} \le a \le 2.5\times10^{-5}\ {\rm cm},
+
+with silicate/graphite-like grains of material density :math:`\rho_{\rm gr} = 3\ \mathrm{g\,cm^{-3}}` and no PAHs.
+The constant :math:`A` is set in every grid cell by requiring the total grain mass
+density to equal the dust-to-gas mass ratio of the model,
+
+.. math::
+
+   \int \frac{4}{3}\pi a^3 \rho_{\rm gr}\,\frac{dn}{da}\,da = 0.01\,(Z/Z_\odot)\,n_{\rm H}\,m_{\rm H}.
+
+Size integrals are either analytic (for pure power laws) or evaluated with a 40-bin
+midpoint sum on a logarithmic grid in :math:`a` (when a non-linear function of
+:math:`a` is involved). ``Grain radius`` is not used by the processes below when
+``MRNDUST = 1``. The processes affected are:
+
+1. **Grain recombination (GRAINRECOMB = 2).** The geometric factor
+   :math:`n_{\rm gr}\pi a^2 J(\tau)` of the single-grain rate is replaced by the sum over the
+   size distribution,
+
+   .. math::
+
+      G(T,Z_{\rm ion}) = \sum_{\rm bins} A\,a^{-3.5}\,\pi a^2\,J\!\left(\tau(a,Z_{\rm ion})\right) \Delta a,
+      \qquad \tau = \frac{a k_B T}{(Z_{\rm ion} e)^2},
+
+   and :math:`k_{\rm gr} = G\,\sqrt{8 k_B T/(\pi m_X)}`. Everything else (division over the
+   channels, the rule for ions with explicit ``#`` reactions, per-electron form) is unchanged.
+   Because the MRN distribution contains many small grains, for the standard
+   dust-to-gas ratio :math:`G` is about 6 times larger than for a single
+   :math:`a = 10^{-5}` cm grain (5.9 at 50 K for singly charged ions), so the grain
+   sink of cations is correspondingly stronger.
+
+2. **H**\ :sub:`2` **formation (H2FORM = CT02).** The Cazaux & Tielens (2002, 2004)
+   silicate and graphite cross sections per H nucleus are fixed literature numbers
+   that do not depend on ``Grain radius``. They are multiplied by
+   :math:`\sigma_{\rm MRN}/\sigma_{\rm CT02}`, where
+
+   .. math::
+
+      \sigma_{\rm MRN} = \frac{3}{4}\,\frac{0.01\,m_{\rm H}}{\rho_{\rm gr}}\,
+      \frac{\int a^{-1.5}\,da}{\int a^{-0.5}\,da} = 1.18\times10^{-21}\ {\rm cm^2\ per\ H\ nucleus}
+
+   (evaluated for :math:`Z=Z_\odot`; the metallicity is applied separately, as in the default code)
+   and :math:`\sigma_{\rm CT02} = 6.273\times10^{-22}` cm\ :sup:`2` is the
+   total cross section of the default code. This increases the H\ :sub:`2` formation rate by
+   a factor of 1.89 (the silicate:graphite ratio, sticking and efficiencies are unchanged).
+   This applies also to ``GRAINRECOMB = 0`` and ``1``.
+
+3. **Gas-grain collisional heating.** The product :math:`n_{\rm gr}\,\pi a^2` of the
+   Burke & Hollenbach (1983) formula, i.e. the grain cross section per unit volume, is replaced by
+   :math:`\sigma_{\rm MRN}\,n_{\rm H}` (the default code uses
+   :math:`1.998\times10^{-12}\,Z\,n_{\rm H}\,\pi a^2`, which equals
+   :math:`6.28\times10^{-22}\,n_{\rm H}` cm\ :sup:`2` for :math:`a=10^{-5}` cm and changes with ``Grain radius`` only through
+   :math:`a^2`). The heating/cooling rate therefore increases by 1.89.
+
+References: Mathis, Rumpl & Nordsieck (1977) for the distribution;
+`Draine & Sutin (1987) <https://ui.adsabs.harvard.edu/abs/1987ApJ...320..803D/abstract>`_ for the grain-ion collision rate;
+Cazaux & Tielens (2002, 2004) for H\ :sub:`2` formation; Burke & Hollenbach (1983) for gas-grain heating.
+
+.. note::
+
+   - Not affected by ``MRNDUST``: the Weingartner & Draine fits of ``GRAINRECOMB = 1`` (which
+     already describe a size distribution), photoelectric heating, the dust temperature
+     (HTT91), the dust opacity of the escape-probability routine, UV and
+     :math:`A_V` attenuation, and the PAH treatment. Thus ``MRNDUST = 1`` modifies
+     only the dust cross section of the three processes above, and not the
+     dust-to-gas ratio.
+   - The size limits and the exponent are fixed in ``src/grain_size.F90``
+     (``mrn_amin``, ``mrn_amax``, ``mrn_q``, ``mrn_nbin``); edit and recompile to change them.
+   - The grain is still assumed to be neutral (polarization limit) in the recombination rate, and no PAHs are
+     included; with the MRN population the neglected grain charge may matter more for the smallest grains.
+   - The reaction types for freeze-out, cosmic-ray and photo-desorption on grains
+     (``FREEZE``, ``ELFRZE``, ``CRH``, ``PHOTD``) keep their hard-wired grain cross section
+     :math:`2.4\times10^{-22}` cm\ :sup:`2` per H nucleus; no shipped network uses them.
 
 --------------------------------
 Numerical Safeguards

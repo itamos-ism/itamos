@@ -660,6 +660,13 @@ Mathematical Formulation (Burke & Hollenbach 1983)
 
    where :math:`a` is the grain radius (assumed uniform in this implementation).
 
+   .. note::
+
+      With ``MRNDUST = 1`` the product :math:`n_{\mathrm{grain}} C_{\mathrm{grain}}` is replaced by the
+      cross section per unit volume of the MRN size distribution,
+      :math:`1.18\times10^{-21}\,n_{\mathrm{H}}` cm\ :sup:`-1` (:math:`Z=Z_\odot`; scaled linearly with :math:`Z`), which is 1.89 times
+      the value of the default expression for :math:`a = 10^{-5}` cm. See :doc:`rates`.
+
 3. **Thermal Accommodation Coefficient** (:math:`\alpha_T`)
 
    Using Groenewegen (1994) fitting formula:

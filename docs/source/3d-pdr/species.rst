@@ -43,6 +43,27 @@ Locate the relevant entries in your species file and modify the abundance values
 
 After saving your changes to the species file, 3D-PDR will automatically use the updated abundances in your next simulation without requiring recompilation.
 
+Example modification for the MEDIUM network
+-------------------------------------------
+
+The ``MEDIUM`` network (``chemfiles/species_medium.d``, 109 species) includes sulphur and magnesium in addition to H, He, C, N and O. Its non-zero initial abundances, which should be the only entries you change, are:
+
+.. code-block:: text
+
+   66,C+,1.40E-04,12.0    # Carbon abundance (start from the ionized phase)
+   105,O,3.00E-04,16.0    # Oxygen abundance
+   104,N,5.65E-05,14.0    # Nitrogen abundance
+   102,S,3.51E-06,32.0    # Sulphur abundance
+   59,Mg+,2.70E-06,24.0   # Ionized magnesium (gas-phase metal)
+   101,He,1.00E-01,4.0    # Helium abundance
+   108,H,4.00E-01,1.0     # Atomic hydrogen
+   107,H2,3.00E-01,2.0    # Molecular hydrogen
+
+All other entries, including the electrons (``e-``, entry 109), should be left at ``0.0``.
+
+.. note::
+   The gas-phase metal abundance (here Mg\ :sup:`+`) controls the electron fraction in the shielded gas, where C\ :sup:`+` has recombined. It therefore directly affects the abundances of molecular ions such as HCO\ :sup:`+`, which are destroyed mainly by dissociative recombination. The default value, 2.7×10\ :sup:`-6`, corresponds to diffuse-cloud depletion; the previous version of the ``MEDIUM`` network used 2.7×10\ :sup:`-7` and had no sulphur. State the adopted metal and sulphur abundances when reporting results, and test their effect if molecular-ion abundances or line ratios such as HCO\ :sup:`+`/HCN are important for your application.
+
 
 
 

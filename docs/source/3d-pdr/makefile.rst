@@ -112,8 +112,8 @@ Second Section (Chemistry and Density Options)
   Selects the chemical network based on the UMIST database.
 
   - ``REDUCED`` — 33 species, 331 reactions.
-  - ``MEDIUM`` — 78 species, 1322 reactions (due to B. Gaches).
-  - ``FULL`` — 215 species, 2926 reactions.
+  - ``MEDIUM`` — 109 species, 1835 reactions. Originally due to B. Gaches (78 species, 1322 reactions); updated in October 2026 with S-bearing (kindly provided by J. Goicoechea) and additional N-bearing chemistry (S, S\ :sup:`+`, S\ :sup:`-`, S\ :sub:`2`, HS, H\ :sub:`2`\ S, H\ :sub:`2`\ S\ :sub:`2`, CS, HCS, H\ :sub:`2`\ CS, SO, SO\ :sub:`2`, OCS, NS and their ions, plus H\ :sub:`2`\ CNH\ :sup:`+` and CO\ :sub:`2`\ :sup:`+`). Elements: H, He, C, N, O, S and Mg. See :doc:`species` for its default initial abundances.
+  - ``FULL`` — 215 species, 2808 reactions.
   - ``MYNETWORK`` — a user-supplied network. Provide your own ``odes_mynetwork.c`` and the matching ``species_mynetwork.d`` / ``rates_mynetwork.d`` files in ``chemfiles/``.
 
   More complex networks increase runtime. See :doc:`species` for how to specify the initial elemental abundances.

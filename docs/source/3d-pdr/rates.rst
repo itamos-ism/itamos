@@ -251,6 +251,104 @@ These rates depend on:
 - local FUV radiation field,
 - dust charging parameter :math:`\Psi`.
 
+In addition, the ``GRAINRECOMB`` compile option (see :doc:`makefile`) adds
+a grain term to the electron recombination of cations computed with one of the two
+treatments below.
+Both non-zero options act on the electron-recombination reactions
+:math:`\mathrm{X}^+ + e^- \rightarrow \ldots` of the chemical network, by adding
+a grain term to the gas-phase rate coefficient. The term is written
+*per electron* (divided by :math:`n(e^-)`) so that, after multiplication by
+:math:`n(e^-)` in the right-hand side of the chemical ODEs,
+it gives the electron-density-independent grain-collision rate
+:math:`k_{\rm gr}\,n(\mathrm{X}^+)`.
+
+``GRAINRECOMB = 1``
+^^^^^^^^^^^^^^^^^^^
+
+Grain-assisted recombination of H\ :sup:`+`, He\ :sup:`+`, C\ :sup:`+`,
+Mg\ :sup:`+`, S\ :sup:`+` and Fe\ :sup:`+` follows the fitting formulae of
+`Weingartner & Draine (2001) <https://ui.adsabs.harvard.edu/abs/2001ApJ...563..842W/abstract>`_
+(coefficients :math:`C_0, \ldots, C_6` tabulated per ion),
+
+.. math::
+
+   \alpha_{\rm gr} = 10^{-14}\,C_0\,\left[1 + C_1\,\Psi^{C_2}\left(1 + C_3\,T^{C_4}\,
+   \Psi^{-C_5 - C_6 \ln T}\right)\right]^{-1}\ \mathrm{cm^3\,s^{-1}},
+
+where :math:`\Psi` is the dust charging parameter, computed from the local
+FUV field of every ray (attenuated with the ray :math:`A_V`), the gas
+temperature and the electron density,
+and the rate is multiplied by :math:`n_{\rm H}/n(e^-)`.
+The fits are normalized to the Milky-Way :math:`R_V=3.1` grain
+size distribution **including PAHs**, so they correspond to a large
+total grain surface and therefore to a strong sink for metal ions.
+Molecular ions are not treated.
+
+Some issues remain for the ``FULL`` network.
+
+``GRAINRECOMB = 2``
+^^^^^^^^^^^^^^^^^^^
+
+This option replaces the empirical fits by a generic grain-collision rate in the
+spirit of `Draine & Sutin (1987) <https://ui.adsabs.harvard.edu/abs/1987ApJ...320..803D/abstract>`_,
+applied identically to **every** reaction of the form
+:math:`\mathrm{X}^{Z+} + e^- \rightarrow \ldots` in the network, atomic
+or molecular (e.g. H\ :sup:`+`, Mg\ :sup:`+`, HCO\ :sup:`+`, H\ :sub:`3`\ :sup:`+`).
+Ions are identified by the trailing ``+`` characters of the species name,
+without any list of species, so it works for any network.
+Reactions that involve grain surfaces (``#`` in the reactant list) and
+:math:`\mathrm{PAH}^+` (which has its own treatment) are excluded.
+
+The model uses a single representative grain of radius :math:`a`
+(``Grain radius`` in ``params.dat``) and material density
+:math:`\rho_{\rm gr} = 3\ \mathrm{g\,cm^{-3}}`.
+The grain number density follows from the dust-to-gas mass ratio
+:math:`0.01\,Z/Z_\odot` (``Dust-to-gas normalized to 1e-2`` in ``params.dat``):
+
+.. math::
+
+   n_{\rm gr} = \frac{0.01\,(Z/Z_\odot)\,n_{\rm H}\,m_{\rm H}}{(4/3)\pi a^3 \rho_{\rm gr}}.
+
+The grain term of the rate coefficient of an ion of mass :math:`m_X` and charge
+:math:`Z_{\rm ion}` is
+
+.. math::
+
+   k_{\rm gr}(\mathrm{X}^{Z+}) = n_{\rm gr}\,\pi a^2\,J(\tau)\,\sqrt{\frac{8 k_B T}{\pi m_X}},
+   \qquad J(\tau) = 1 + \sqrt{\frac{\pi}{2\tau}},
+   \qquad \tau = \frac{a k_B T}{(Z_{\rm ion} e)^2},
+
+i.e. the collision rate of the ion with a neutral grain, enhanced by
+the ion-induced polarization of the grain (eq. 3.1 of Draine & Sutin 1987;
+:math:`Z_{\rm ion}` is the number of trailing ``+`` characters, 1 for most species and 2 for
+doubly ionized ones such as C\ :sup:`++` or S\ :sup:`++`).
+Every collision is assumed to neutralize the ion (unit charge-transfer probability).
+If an ion has :math:`N` electron-recombination channels in the network,
+the grain term is shared equally between them, so the total added rate equals
+:math:`k_{\rm gr}` exactly once.
+
+.. note::
+
+   - ``GRAINRECOMB = 2`` includes **no** PAH population: with a single
+     grain of :math:`a = 10^{-5}` cm the total grain surface is much smaller than
+     the one implied by the Weingartner & Draine fits, so the grain sink for the metal
+     ions is weaker than for ``GRAINRECOMB = 1``. For a fixed dust-to-gas ratio
+     :math:`k_{\rm gr}\propto 1/a`, i.e. the result is sensitive to the grain
+     radius adopted in ``params.dat``.
+   - The grain is assumed to be neutral (polarization limit); the grain charge
+     distribution is not computed.
+   - Molecular ions are also neutralized on grains, which is not the case for
+     ``GRAINRECOMB = 1``. Abundances of molecular ions, in particular
+     HCO\ :sup:`+`, can therefore change.
+   - The ``REDUCED`` network contains explicit grain-surface recombination
+     reactions of He\ :sup:`+` and C\ :sup:`+` (with ``#`` in the reactant
+     list, following `Gong et al. (2017) <https://ui.adsabs.harvard.edu/abs/2017ApJ...843...38G/abstract>`_).
+     They are not modified by ``GRAINRECOMB = 2`` but remain active, so for these two ions
+     the grain sink is counted twice with this network (the same holds for ``GRAINRECOMB = 1``).
+     The ``MEDIUM``, ``FULL`` and ``MYNETWORK`` networks do not have such reactions.
+   - The ``REDUCED``, ``MEDIUM``, ``FULL`` and ``MYNETWORK`` networks can all be
+     used.
+
 --------------------------------
 Numerical Safeguards
 --------------------------------

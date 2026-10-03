@@ -144,9 +144,22 @@ Second Section (Chemistry and Density Options)
   Recommended value: ``FORCECONVERGENCE = 1``.
 
 - **GRAINRECOMB**:
-  Enables electron recombination on dust grains.
-  ``GRAINRECOMB = 1`` uses the treatment from `Weingartner & Draine (2001) <https://ui.adsabs.harvard.edu/abs/2001ApJ...563..842W/abstract>`_.
-  Some issues remain for the ``FULL`` network.
+  Selects the treatment of electron recombination of cations on dust grains.
+
+  - ``GRAINRECOMB = 0`` — grain-assisted recombination switched off (default).
+  - ``GRAINRECOMB = 1`` — adds the `Weingartner & Draine (2001) <https://ui.adsabs.harvard.edu/abs/2001ApJ...563..842W/abstract>`_
+    fitting formulae (which depend on the dust charging parameter :math:`\Psi`) to the recombination of
+    H\ :sup:`+`, He\ :sup:`+`, C\ :sup:`+`, Mg\ :sup:`+`, S\ :sup:`+` and Fe\ :sup:`+`.
+    Some issues remain for the ``FULL`` network.
+  - ``GRAINRECOMB = 2`` — adds the generic `Draine & Sutin (1987) <https://ui.adsabs.harvard.edu/abs/1987ApJ...320..803D/abstract>`_
+    grain-collision rate to the recombination of **every** cation of the network (atomic and molecular),
+    computed from the single grain of radius ``Grain radius`` given in ``params.dat``
+    and the dust-to-gas ratio. This option does not use the fitting coefficients of Weingartner & Draine (2001).
+    See :doc:`rates` for the equations and caveats.
+
+  The options are mutually exclusive and any other value stops the build.
+  ``GRAINRECOMB = 2`` needs no extra input and works with all networks
+  (``REDUCED``, ``MEDIUM``, ``FULL``, ``MYNETWORK``).
 
 - **SUPRATHERMAL**:
   Enables suprathermal formation of CO via CH⁺.
